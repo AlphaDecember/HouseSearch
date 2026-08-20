@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 <title>House-Hunting Map — High School Attendance Zones near Peachtree Corners, GA</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   :root{--ink:#1f2937;--muted:#6b7280;--bg:#f8fafc;}
   *{box-sizing:border-box;}
-  html,body{height:100%;margin:0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);}
-  #app{display:flex;flex-direction:column;height:100vh;}
+  html,body{height:100%;margin:0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);overscroll-behavior:none;}
+  #app{display:flex;flex-direction:column;height:100vh;height:100dvh;}
   header{background:linear-gradient(135deg,#1e3a8a,#1d4ed8);color:white;padding:12px 20px;box-shadow:0 2px 8px rgba(0,0,0,.15);z-index:1000;flex-shrink:0;}
   header h1{margin:0;font-size:1.1rem;font-weight:600;}
   header p{margin:4px 0 0;font-size:.8rem;color:#dbeafe;}
@@ -116,6 +116,7 @@
   #legend-markers,#legend-zones{font-size:.82rem;line-height:1.6;}
 
   @media (max-width:768px){
+    html,body{overflow:hidden;overscroll-behavior:none;position:fixed;width:100%;height:100%;}
     header h1{font-size:.95rem;line-height:1.25;}
     header p{font-size:.72rem;}
     #main{position:relative;padding-bottom:48px;}
@@ -126,7 +127,7 @@
     body.view-map #map-wrap{display:block;}
     body.view-list #sidebar{display:flex;}
     body.view-list #map-wrap{display:none;}
-    #view-toggle{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:1500;background:white;border-top:1px solid #e5e7eb;box-shadow:0 -2px 10px rgba(0,0,0,.08);}
+    #view-toggle{display:flex;position:fixed;bottom:0;left:0;right:0;height:48px;z-index:1500;background:white;border-top:1px solid #e5e7eb;box-shadow:0 -2px 10px rgba(0,0,0,.08);}
     #view-toggle button{flex:1;border:none;background:white;padding:12px 0;font-size:.9rem;font-weight:600;color:var(--muted);cursor:pointer;}
     #view-toggle button.active{color:#1d4ed8;box-shadow:inset 0 -3px 0 #1d4ed8;background:#f0f6ff;}
     footer{display:none;}
@@ -135,8 +136,10 @@
     #controls input[type=text]{padding:11px;font-size:1rem;}
     #filter-toggle{display:block;width:100%;margin-top:2px;padding:8px;border:1px solid #d1d5db;border-radius:6px;background:#f8fafc;font-size:.8rem;font-weight:600;color:var(--muted);cursor:pointer;}
     #controls.collapsed .filter-group{display:none;}
-    #map-toolbar{top:auto;bottom:60px;left:10px;flex-direction:row;}
-    .mt-btn{width:46px;height:46px;font-size:21px;}
+    /* Toolbar sits ABOVE the bottom tab bar, floated out of the map stacking context */
+    #map-toolbar{position:fixed;top:auto;bottom:56px;left:50%;transform:translateX(-50%);flex-direction:row;gap:10px;z-index:1550;background:rgba(255,255,255,.92);padding:6px 8px;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.25);}
+    body.view-list #map-toolbar{display:none;}
+    .mt-btn{width:48px;height:48px;font-size:22px;touch-action:manipulation;}
     .drawer{top:auto;bottom:0;left:0;width:100%;max-width:100%;height:74%;transform:translateY(106%);border-radius:16px 16px 0 0;overflow:hidden;z-index:1600;}
     .drawer.open{transform:translateY(0);z-index:1650;}
     .drawer-body{padding-bottom:60px;}
@@ -282,9 +285,6 @@ function nicheGradeClass(g){if(!g)return"";if(g.startsWith("A"))return"grade-A";
 const SCHOOLS=[{"name": "Gwinnett School of Mathematics, Science & Technology (GSMST)", "lat": 33.9573, "lon": -83.9932, "district": "Gwinnett County", "city": "Lawrenceville", "enrollment": 1304, "ratio": "17:1", "niche": "A+", "niche_rank": "#1 Best Public HS in GA", "usnews_state": 1, "usnews_natl": 7, "specialty": "Selective STEM magnet (application/audition admission); 100% AP participation; #1 in Georgia and top-10 nationally.", "drive": "~25-30 min", "tier": "magnet"}, {"name": "Paul Duke STEM High School", "lat": 33.9519, "lon": -84.2229, "district": "Gwinnett County", "city": "Norcross", "enrollment": 1508, "ratio": "18:1", "niche": "A+", "niche_rank": "#4 Best Public HS, Gwinnett County", "usnews_state": 21, "usnews_natl": 659, "specialty": "Project-based STEM, AP Capstone, nationally recognized VEX Robotics, 2025 National ESEA Distinguished School.", "drive": "~5-10 min", "tier": "magnet"}, {"name": "Norcross High School", "lat": 33.9672, "lon": -84.2121, "district": "Gwinnett County", "city": "Norcross / Peachtree Corners", "enrollment": 2317, "ratio": "14:1", "niche": "B", "niche_rank": "Ranked top 50% in GA", "usnews_state": 195, "usnews_natl": 7957, "specialty": "Home HS for Peachtree Corners; IB Diploma Programme; Georgia AP Honor School in 6 categories.", "drive": "~5 min (local zoned school)", "tier": "comprehensive"}, {"name": "Meadowcreek High School", "lat": 33.927, "lon": -84.1652, "district": "Gwinnett County", "city": "Norcross", "enrollment": 2640, "ratio": "13.6:1", "niche": "C+", "niche_rank": "Large, diverse comprehensive HS", "usnews_state": 326, "usnews_natl": 13427, "specialty": "Nationally recognized Culinary Management CTAE pathway; highly diverse student population.", "drive": "~10-15 min", "tier": "comprehensive"}, {"name": "Duluth High School", "lat": 34.0029, "lon": -84.1349, "district": "Gwinnett County", "city": "Duluth", "enrollment": 2556, "ratio": "16:1", "niche": "A", "niche_rank": "#11 Most Diverse Public HS in GA", "usnews_state": 108, "usnews_natl": 4110, "specialty": "Strong dual-enrollment, broad AP catalog, one of the most diverse student bodies in the state.", "drive": "~10-15 min", "tier": "comprehensive"}, {"name": "McClure Health Science High School", "lat": 34.0067, "lon": -84.133, "district": "Gwinnett County", "city": "Duluth", "enrollment": 1171, "ratio": "16:1", "niche": "B+", "niche_rank": "Georgia rank #59", "usnews_state": 59, "usnews_natl": 2408, "specialty": "Health-science magnet preparing students for medical & allied-health careers via clinical partnerships.", "drive": "~15 min", "tier": "magnet"}, {"name": "Peachtree Ridge High School", "lat": 34.0129, "lon": -84.0873, "district": "Gwinnett County", "city": "Suwanee", "enrollment": 2605, "ratio": "16.8:1", "niche": "A-", "niche_rank": "Georgia rank #49", "usnews_state": 49, "usnews_natl": 1987, "specialty": "Renowned band & fine-arts program; strong AP participation and college-prep culture.", "drive": "~15-20 min", "tier": "comprehensive"}, {"name": "Collins Hill High School", "lat": 34.0089, "lon": -84.0704, "district": "Gwinnett County", "city": "Suwanee", "enrollment": 2485, "ratio": "17:1", "niche": "A", "niche_rank": "Georgia rank #85", "usnews_state": 85, "usnews_natl": 3474, "specialty": "Strong performing-arts and science proficiency (top 20% in GA for science); diverse student body.", "drive": "~20 min", "tier": "comprehensive"}, {"name": "North Gwinnett High School", "lat": 34.0523, "lon": -84.0715, "district": "Gwinnett County", "city": "Suwanee", "enrollment": 3033, "ratio": "18.5:1", "niche": "A", "niche_rank": "Georgia rank #16-21 (top 50 in GA)", "usnews_state": 21, "usnews_natl": 527, "specialty": "Large comprehensive school with nationally recognized marching band and strong AP curriculum.", "drive": "~20-25 min", "tier": "comprehensive"}, {"name": "Central Gwinnett High School", "lat": 33.9556, "lon": -83.9976, "district": "Gwinnett County", "city": "Lawrenceville", "enrollment": 2444, "ratio": "14.6:1", "niche": "B", "niche_rank": "Georgia rank #182", "usnews_state": 182, "usnews_natl": 7319, "specialty": "Comprehensive school with CTAE career pathways; diverse population.", "drive": "~25 min", "tier": "comprehensive"}, {"name": "Discovery High School", "lat": 33.9187, "lon": -83.9927, "district": "Gwinnett County", "city": "Lawrenceville", "enrollment": 2730, "ratio": "15.6:1", "niche": "B", "niche_rank": "Georgia rank #164", "usnews_state": 164, "usnews_natl": 6952, "specialty": "Comprehensive high school with strong CTAE offerings.", "drive": "~25 min", "tier": "comprehensive"}, {"name": "Mountain View High School", "lat": 33.9364, "lon": -84.0189, "district": "Gwinnett County", "city": "Lawrenceville", "enrollment": 2285, "ratio": "17.1:1", "niche": "A-", "niche_rank": "Georgia rank #69 (top 50 in GA)", "usnews_state": 69, "usnews_natl": 2723, "specialty": "Strong fine-arts and STEM offerings; consistently in Georgia's top 50 high schools.", "drive": "~25-30 min", "tier": "comprehensive"}, {"name": "Archer High School", "lat": 33.9187, "lon": -83.9958, "district": "Gwinnett County", "city": "Lawrenceville", "enrollment": 3073, "ratio": "19.3-20:1", "niche": "A", "niche_rank": "#66 Best Public HS in GA", "usnews_state": 52, "usnews_natl": 2154, "specialty": "Large, diverse comprehensive school; strong athletics; top-20% in GA for reading & math.", "drive": "~30 min", "tier": "comprehensive"}, {"name": "Berkmar High School", "lat": 33.9127, "lon": -84.1207, "district": "Gwinnett County", "city": "Lilburn", "enrollment": 3089, "ratio": "15.5:1", "niche": "B", "niche_rank": "Georgia rank #271", "usnews_state": 271, "usnews_natl": 11008, "specialty": "Nationally recognized Culinary Arts CTAE program; highly diverse.", "drive": "~15-20 min", "tier": "comprehensive"}, {"name": "Parkview High School", "lat": 33.8944, "lon": -84.0968, "district": "Gwinnett County", "city": "Lilburn", "enrollment": 3216, "ratio": "19:1", "niche": "A", "niche_rank": "#9 Best Public HS, Gwinnett County", "usnews_state": 53, "usnews_natl": 2180, "specialty": "One of Gwinnett's largest schools; strong band, athletics and CTAE pathways.", "drive": "~20-25 min", "tier": "comprehensive"}, {"name": "Brookwood High School", "lat": 33.8865, "lon": -84.0006, "district": "Gwinnett County", "city": "Snellville", "enrollment": 3880, "ratio": "18.5:1", "niche": "A-", "niche_rank": "Georgia rank #36 (top 50 in GA)", "usnews_state": 36, "usnews_natl": 1360, "specialty": "One of the largest high schools in Georgia; strong band program and broad AP catalog.", "drive": "~30 min", "tier": "comprehensive"}, {"name": "Mill Creek High School", "lat": 34.0665, "lon": -83.8493, "district": "Gwinnett County", "city": "Hoschton/Dacula", "enrollment": 2745, "ratio": "16.9:1", "niche": "A-", "niche_rank": "Georgia rank #37 (top 50 in GA)", "usnews_state": 37, "usnews_natl": 1433, "specialty": "One of Georgia's largest and highest-achieving comprehensive HS; nationally recognized band & orchestra.", "drive": "~40-45 min (edge of range)", "tier": "comprehensive"}, {"name": "Dacula High School", "lat": 34.0004, "lon": -83.906, "district": "Gwinnett County", "city": "Dacula", "enrollment": 2534, "ratio": "17.9:1", "niche": "B+", "niche_rank": "Georgia rank #87 (top 100 in GA)", "usnews_state": 87, "usnews_natl": 3506, "specialty": "Comprehensive HS with strong CTAE and agricultural-education programs.", "drive": "~30-35 min", "tier": "comprehensive"}, {"name": "Lanier High School", "lat": 34.0859, "lon": -84.0332, "district": "Gwinnett County", "city": "Sugar Hill", "enrollment": 1871, "ratio": "17:1", "niche": "A-", "niche_rank": "Georgia rank #55-57 (top 50 in GA)", "usnews_state": 57, "usnews_natl": 2073, "specialty": "Comprehensive school with top-5% science proficiency in Georgia.", "drive": "~30 min", "tier": "comprehensive"}, {"name": "Seckinger High School", "lat": 34.0794, "lon": -83.9118, "district": "Gwinnett County", "city": "Buford", "enrollment": 1923, "ratio": "n/a", "niche": "A-", "niche_rank": "Georgia rank #71 (top 100 in GA)", "usnews_state": 71, "usnews_natl": 2865, "specialty": "Newest GCPS high school (opened 2022); modern STEM-focused facilities.", "drive": "~30-35 min", "tier": "comprehensive"}, {"name": "Buford High School", "lat": 34.1224, "lon": -83.9945, "district": "Buford City", "city": "Buford", "enrollment": 1966, "ratio": "17:1", "niche": "A+", "niche_rank": "#10 Best Public HS in GA; #1 for Athletes", "usnews_state": 23, "usnews_natl": 239, "specialty": "Statewide athletics powerhouse with strong academics; independent city school district.", "drive": "~30-35 min", "tier": "comprehensive"}, {"name": "Johns Creek High School", "lat": 34.0299, "lon": -84.1979, "district": "Fulton County", "city": "Johns Creek/Alpharetta", "enrollment": 1789, "ratio": "18:1", "niche": "A+", "niche_rank": "#13 Best Public HS in GA", "usnews_state": 23, "usnews_natl": 770, "specialty": "Top-5% math/reading proficiency in GA; strong STEM & college-readiness (#4 in Fulton).", "drive": "~20-25 min", "tier": "comprehensive"}, {"name": "Chattahoochee High School", "lat": 34.0201, "lon": -84.2434, "district": "Fulton County", "city": "Alpharetta/Johns Creek", "enrollment": 1730, "ratio": "16:1", "niche": "A+", "niche_rank": "#6 Best Public HS in GA", "usnews_state": 6, "usnews_natl": null, "specialty": "IB Diploma Programme alongside AP; #3 for best teachers in GA.", "drive": "~25-30 min", "tier": "comprehensive"}, {"name": "Northview High School", "lat": 34.0391, "lon": -84.1777, "district": "Fulton County", "city": "Johns Creek/Duluth", "enrollment": 1591, "ratio": "17:1", "niche": "A+", "niche_rank": "#5 Best Public HS in GA", "usnews_state": 7, "usnews_natl": 248, "specialty": "#1 in Fulton County; dual enrollment with Georgia Tech, Kennesaw State & Gwinnett Tech; ~100 clubs.", "drive": "~15-20 min", "tier": "comprehensive"}, {"name": "Milton High School", "lat": 34.1265, "lon": -84.2865, "district": "Fulton County", "city": "Alpharetta/Milton", "enrollment": 1999, "ratio": "18:1", "niche": "A+", "niche_rank": "#8 Best Public HS in GA", "usnews_state": 8, "usnews_natl": null, "specialty": "IB Diploma Programme; #9 in GA for athletics and #10 for teacher quality; Blue Ribbon School.", "drive": "~30-35 min", "tier": "comprehensive"}, {"name": "Roswell High School", "lat": 34.0264, "lon": -84.3319, "district": "Fulton County", "city": "Roswell", "enrollment": 2035, "ratio": "16:1", "niche": "B+", "niche_rank": "Georgia rank #72", "usnews_state": 72, "usnews_natl": 2680, "specialty": "Strong science proficiency (top 10% in GA); long-standing arts programs.", "drive": "~30-35 min", "tier": "comprehensive"}, {"name": "Alpharetta High School", "lat": 34.0742, "lon": -84.2553, "district": "Fulton County", "city": "Alpharetta", "enrollment": 2024, "ratio": "17:1", "niche": "A+", "niche_rank": "#7 Best Public HS in GA", "usnews_state": 20, "usnews_natl": 622, "specialty": "A 'best all-around' metro Atlanta school; top-10% in GA with strong AP participation.", "drive": "~20-25 min", "tier": "comprehensive"}, {"name": "Cambridge High School", "lat": 34.095, "lon": -84.305, "district": "Fulton County", "city": "Milton/Alpharetta", "enrollment": 1602, "ratio": "16:1", "niche": "A", "niche_rank": "Top-10% in GA (10/10)", "usnews_state": null, "usnews_natl": null, "specialty": "Opened 2012 to relieve Alpharetta & Milton; top-5% in GA for reading and science.", "drive": "~25-30 min", "tier": "comprehensive"}, {"name": "Centennial High School", "lat": 34.043, "lon": -84.276, "district": "Fulton County", "city": "Roswell", "enrollment": 1783, "ratio": "17:1", "niche": "B+", "niche_rank": "Georgia rank ~#95", "usnews_state": 95, "usnews_natl": null, "specialty": "Comprehensive north-Fulton school with a dedicated arts/IB feeder tradition and strong CTAE.", "drive": "~25-30 min", "tier": "comprehensive"}, {"name": "Lambert High School", "lat": 34.0937, "lon": -84.1046, "district": "Forsyth County", "city": "Suwanee", "enrollment": 3249, "ratio": "19:1", "niche": "A+", "niche_rank": "Georgia rank ~#10-21 (top 5% in GA)", "usnews_state": null, "usnews_natl": null, "specialty": "Large, high-achieving comprehensive HS with 31 AP course offerings.", "drive": "~25-30 min", "tier": "comprehensive"}, {"name": "South Forsyth High School", "lat": 34.1046, "lon": -84.1382, "district": "Forsyth County", "city": "Cumming", "enrollment": 2634, "ratio": "19:1", "niche": "A+", "niche_rank": "#12 Best Public HS in GA", "usnews_state": 20, "usnews_natl": 689, "specialty": "Top-5% science proficiency in GA (80%); one of the fastest-rising schools in Georgia.", "drive": "~30-35 min", "tier": "comprehensive"}, {"name": "Alliance Academy for Innovation", "lat": 34.2188, "lon": -84.1156, "district": "Forsyth County (Charter)", "city": "Cumming", "enrollment": 1145, "ratio": "n/a", "niche": "A+", "niche_rank": "#3 Best HS in Georgia (SchoolDigger)", "usnews_state": null, "usnews_natl": null, "specialty": "Innovative charter emphasizing project-based, entrepreneurial learning; top proficiency in Forsyth.", "drive": "~35-40 min", "tier": "magnet"}, {"name": "Chamblee High School (Chamblee Charter)", "lat": 33.8879, "lon": -84.3096, "district": "DeKalb County (Charter)", "city": "Chamblee", "enrollment": 1829, "ratio": "17:1", "niche": "A", "niche_rank": "#2 Best Public HS, DeKalb County", "usnews_state": 38, "usnews_natl": 1456, "specialty": "Charter with rigorous academics; strong reading/language-arts proficiency (top 10% in GA).", "drive": "~20-25 min", "tier": "comprehensive"}, {"name": "Dunwoody High School", "lat": 33.937, "lon": -84.3157, "district": "DeKalb County", "city": "Dunwoody", "enrollment": 1974, "ratio": "16:1", "niche": "A", "niche_rank": "#5 Best Public HS, DeKalb County", "usnews_state": null, "usnews_natl": null, "specialty": "Comprehensive school with strong reading proficiency (top 20% in GA) and STEM offerings.", "drive": "~15-20 min", "tier": "comprehensive"}, {"name": "Lakeside High School", "lat": 33.8457, "lon": -84.2849, "district": "DeKalb County", "city": "Atlanta (North Druid Hills)", "enrollment": 2186, "ratio": "17:1", "niche": "B+", "niche_rank": "Georgia rank #120", "usnews_state": 120, "usnews_natl": 4648, "specialty": "Dedicated performing-arts building; historically strong AP participation and diverse student body.", "drive": "~20-25 min", "tier": "comprehensive"}, {"name": "Walton High School", "lat": 34.03, "lon": -84.418, "district": "Cobb County", "city": "Marietta (East Cobb)", "enrollment": 2705, "ratio": "19:1", "niche": "A+", "niche_rank": "#1 Best Public HS, Cobb County", "usnews_state": 6, "usnews_natl": 220, "specialty": "Blue Ribbon School, #1 in Cobb, top-5% in GA for math/reading/science; strong STEM.", "drive": "~35-40 min", "tier": "comprehensive"}, {"name": "Lassiter High School", "lat": 34.052, "lon": -84.452, "district": "Cobb County", "city": "Marietta (East Cobb)", "enrollment": 2005, "ratio": "18:1", "niche": "A+", "niche_rank": "#2 Best Public HS, Cobb County", "usnews_state": 11, "usnews_natl": 321, "specialty": "Top-5% in GA; renowned performing-arts and band program.", "drive": "~35-40 min", "tier": "comprehensive"}, {"name": "Pope High School", "lat": 34.045, "lon": -84.435, "district": "Cobb County", "city": "Marietta (East Cobb)", "enrollment": 1793, "ratio": "17:1", "niche": "A+", "niche_rank": "#3 Best Public HS, Cobb County", "usnews_state": 24, "usnews_natl": 702, "specialty": "Top-5% in GA for math and reading; AP School of Distinction; ~100% graduation.", "drive": "~35-40 min", "tier": "comprehensive"}, {"name": "Wheeler High School", "lat": 33.96, "lon": -84.4784, "district": "Cobb County", "city": "Marietta", "enrollment": 2380, "ratio": "17:1", "niche": "A", "niche_rank": "#3 in Cobb (Niche)", "usnews_state": 48, "usnews_natl": 1913, "specialty": "Home of the Wheeler Magnet \u2014 selective Center for Advanced Studies in Science, Math & Technology.", "drive": "~30-35 min", "tier": "magnet"}, {"name": "Sprayberry High School", "lat": 34.02, "lon": -84.468, "district": "Cobb County", "city": "Marietta", "enrollment": 1841, "ratio": "18:1", "niche": "A-", "niche_rank": "#10 Best Public HS, Cobb County", "usnews_state": 69, "usnews_natl": null, "specialty": "AP STEM & Humanities Honor School; strong CTAE career pathways.", "drive": "~35 min", "tier": "comprehensive"}, {"name": "Kell High School", "lat": 34.065, "lon": -84.47, "district": "Cobb County", "city": "Marietta", "enrollment": 1514, "ratio": "18:1", "niche": "A-", "niche_rank": "Georgia rank ~#78", "usnews_state": 78, "usnews_natl": null, "specialty": "AP STEM & Humanities Honor School; strong arts and athletics.", "drive": "~35-40 min", "tier": "comprehensive"}, {"name": "Marietta High School", "lat": 33.951, "lon": -84.56, "district": "Cobb County (Marietta City)", "city": "Marietta", "enrollment": 2595, "ratio": "16:1", "niche": "B+", "niche_rank": "Marietta City Schools flagship", "usnews_state": null, "usnews_natl": null, "specialty": "Only HS in the independent Marietta City district; full IB World School with Center for Advanced Academics.", "drive": "~35-40 min", "tier": "magnet"}, {"name": "River Ridge High School", "lat": 34.1161, "lon": -84.4807, "district": "Cherokee County", "city": "Woodstock", "enrollment": 1902, "ratio": "16:1", "niche": "A-", "niche_rank": "#1 Best Public HS, Cherokee County", "usnews_state": 64, "usnews_natl": 2668, "specialty": "Top-ranked Cherokee school (SchoolDigger 5-star, #34 in GA); strong balanced proficiency.", "drive": "~35-45 min", "tier": "comprehensive"}, {"name": "Woodstock High School", "lat": 34.101, "lon": -84.548, "district": "Cherokee County", "city": "Woodstock", "enrollment": 2006, "ratio": "16:1", "niche": "A-", "niche_rank": "#2 Best Public HS, Cherokee County", "usnews_state": null, "usnews_natl": null, "specialty": "96% graduation; strong Biology Milestones; biggest statewide ranking riser in 2026.", "drive": "~35-45 min", "tier": "comprehensive"}, {"name": "Etowah High School", "lat": 34.128, "lon": -84.509, "district": "Cherokee County", "city": "Woodstock", "enrollment": 2393, "ratio": "16:1", "niche": "B+", "niche_rank": "Georgia rank ~#62 (SchoolDigger)", "usnews_state": null, "usnews_natl": null, "specialty": "Large Towne Lake-area school with strong Biology proficiency and broad CTAE pathways.", "drive": "~40-45 min (edge of range)", "tier": "comprehensive"}];
 const DISTRICT_POLYGONS={"Gwinnett County": [[34.098, -84.15], [34.166, -84.02], [34.095, -83.815], [33.96, -83.78], [33.79, -83.83], [33.8, -84.02], [33.88, -84.23], [33.985, -84.245], [34.098, -84.15]], "Fulton County": [[34.365, -84.285], [34.135, -84.11], [33.945, -84.23], [33.845, -84.28], [33.75, -84.29], [33.6, -84.35], [33.45, -84.48], [33.35, -84.58], [33.45, -84.72], [33.6, -84.7], [33.75, -84.65], [33.85, -84.58], [33.95, -84.47], [34.05, -84.4], [34.15, -84.34], [34.28, -84.31], [34.365, -84.285]], "Forsyth County": [[34.335, -84.185], [34.28, -84.06], [34.15, -83.98], [34.05, -84.05], [34.0, -84.15], [34.02, -84.28], [34.15, -84.33], [34.28, -84.3], [34.335, -84.185]], "DeKalb County": [[33.965, -84.365], [33.9, -84.23], [33.855, -84.115], [33.775, -84.02], [33.65, -84.05], [33.65, -84.2], [33.7, -84.35], [33.83, -84.4], [33.965, -84.365]], "Buford City": [[34.135, -83.965], [34.14, -83.985], [34.128, -84.01], [34.108, -84.005], [34.1, -83.978], [34.112, -83.955], [34.135, -83.965]], "Cobb County": [[34.135, -84.61], [34.135, -84.42], [34.02, -84.37], [33.9, -84.4], [33.8, -84.52], [33.82, -84.62], [33.95, -84.68], [34.08, -84.66], [34.135, -84.61]], "Cherokee County": [[34.55, -84.66], [34.55, -84.33], [34.36, -84.29], [34.15, -84.33], [34.075, -84.45], [34.085, -84.6], [34.15, -84.71], [34.32, -84.73], [34.55, -84.66]]};
 
-/* Live high-school attendance-zone sources. Each has an ordered list of candidate query URLs
-   (tried until one works), the property holding the HS name (or null = auto-detect), and an
-   optional level filter for mixed elem/middle/high layers. Pagination handled automatically. */
 const ZONE_SOURCES={
   gwinnett:{label:"Gwinnett",urls:[
     "https://gis3.gwinnettcounty.com/mapvis/rest/services/GISDataBrowser/GC_Main/MapServer/26/query"
@@ -306,7 +306,6 @@ let map,markers={},outlineLayer,zoneLayer=null;
 const state={search:"",district:"all",tier:"all"};
 const sortedSchools=[...SCHOOLS].sort((a,b)=>a.name.localeCompare(b.name));
 
-/* ---------------- Basemaps ---------------- */
 function buildBaseLayers(){
   const osm=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'});
   const carto=L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{maxZoom:20,subdomains:'abcd',attribution:'© OSM © Carto'});
@@ -369,7 +368,6 @@ function renderMarkers(){
   });
 }
 
-/* ================= ZONES: robust multi-source loader ================= */
 function hashColor(str){let h=0;for(let i=0;i<str.length;i++){h=str.charCodeAt(i)+((h<<5)-h);}return 'hsl('+(Math.abs(h)%360)+',65%,55%)';}
 const HS_FIELDS=["HIGH","HIGH_SCHO","HIGH_SCHOOL","HS","HS_NAME","HSNAME","HS_Name","HIGHSCHOOL","HighSchool","high","SCH_NAME","SCHOOLNAME","SchoolName","SCHOOL","NAME","schnam","hs_zone","ClusterNam"];
 function detectHSField(props){
@@ -408,7 +406,6 @@ function clearZones(){
   setZoneStatus('','');renderDiag([]);
 }
 
-/* Filter a source's features to high-school level (only if a level field exists AND matching works) */
 function filterHigh(feats,levelHint){
   if(!levelHint||!feats.length)return feats;
   const lf=detectLevelField(feats[0].properties||{});
@@ -418,9 +415,8 @@ function filterHigh(feats,levelHint){
     const v=String((f.properties||{})[lf]||'').toLowerCase();
     return v.includes(want)||v==='hs'||v==='h'||v.includes('high');
   });
-  return out.length?out:feats;   // never wipe everything out
+  return out.length?out:feats;
 }
-/* Normalize + tag features with __HS__/__COUNTY__ */
 function normalize(feats,cfg){
   feats=filterHigh(feats,cfg.level);
   const hsField=cfg.hsField||detectHSField((feats[0]||{}).properties||{});
@@ -428,7 +424,6 @@ function normalize(feats,cfg){
   return feats;
 }
 
-/* Fetch ONE url with pagination; returns array of raw GeoJSON features (throws on hard failure) */
 async function fetchPaged(baseUrl){
   const all=[];let offset=0;const page=1000;
   for(let guard=0;guard<40;guard++){
@@ -447,7 +442,6 @@ async function fetchPaged(baseUrl){
   if(!all.length)throw new Error('no features');
   return all;
 }
-/* Try each candidate URL until one yields features */
 async function fetchSource(key){
   const cfg=ZONE_SOURCES[key];let lastErr;
   for(const u of cfg.urls){
@@ -487,12 +481,10 @@ function renderZones(fc){
   document.getElementById('btn-clear-zones').style.display='block';
 }
 
-/* Load selected counties, merging with any zones already loaded (e.g., a Cobb file). */
 async function loadCounties(keys,btnEl,btnLabel){
   if(btnEl){btnEl.disabled=true;btnEl.textContent='⏳ Loading…';}
   setZoneStatus('warn','Contacting county GIS services…');
   const merged=(currentZoneFC?currentZoneFC.features.slice():[]);
-  // drop any features from counties we're about to reload, to avoid duplicates
   const reloading=new Set(keys.map(k=>ZONE_SOURCES[k].label));
   const base=merged.filter(f=>!reloading.has(f.properties&&f.properties.__COUNTY__));
   const diag=[];
@@ -505,7 +497,6 @@ async function loadCounties(keys,btnEl,btnLabel){
     if(r.feats&&r.feats.length){add.push(...r.feats);diag.push({cls:'zd-ok',label:lab,note:r.feats.length+' zones ✓'});}
     else {diag.push({cls:'zd-fail',label:lab,note:'blocked — use file'});}
   });
-  // keep prior file-loaded counties (Cobb/Cherokee) visible in diag
   ['Cobb','Cherokee'].forEach(c=>{ if(base.some(f=>f.properties.__COUNTY__===c)) diag.push({cls:'zd-file',label:c,note:'from file ✓'}); });
 
   if(btnEl){btnEl.disabled=false;btnEl.textContent=btnLabel;}
@@ -523,7 +514,6 @@ async function loadCounties(keys,btnEl,btnLabel){
   }
 }
 
-/* File loader — supports multiple files at once (e.g., Cobb + Cherokee) and merges with live zones */
 function loadLocalFiles(evt){
   const files=[...(evt.target.files||[])];if(!files.length)return;
   setZoneStatus('warn','Reading '+files.length+' file(s)…');
@@ -555,7 +545,6 @@ function finishFiles(collected,diag){
   else{setZoneStatus('err','No usable polygons found in those files.');renderDiag(diag);}
 }
 
-/* ================= ADDRESS SEARCH ================= */
 let addrMarker=null,addrLine=null;
 function pointInRing(lon,lat,ring){let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1];const hit=((yi>lat)!==(yj>lat))&&(lon<(xj-xi)*(lat-yi)/((yj-yi)||1e-12)+xi);if(hit)inside=!inside;}return inside;}
 function pointInFeature(lon,lat,geom){
@@ -616,7 +605,6 @@ async function checkAddress(){
   }finally{btn.disabled=false;btn.textContent='Check';}
 }
 
-/* ================= LIST / FILTERS ================= */
 function passesFilter(s){
   const q=state.search.trim().toLowerCase();
   const ms=!q||s.name.toLowerCase().includes(q)||s.city.toLowerCase().includes(q);
@@ -649,12 +637,10 @@ function renderList(){
 function renderDistrictChips(){
   const districts=["Gwinnett County","Fulton County","Cobb County","Forsyth County","Cherokee County","DeKalb County","Buford City"];
   const c=document.getElementById('district-chips');
-  c.innerHTML='<span class="chip active" data-district="all">All</span>'+districts.map(d=>'<span class="chip" data-district="'+d+'" style="border-color:'+DISTRICT_COLORS[d]+'">'+d.replace(' County','').replace(' City',' City')+'</span>').join('');
+  c.innerHTML='<span class="chip active" data-district="all">All</span>'+districts.map(d=>'<span class="chip" data-district="'+d+'" style="border-color:'+DISTRICT_COLORS[d]+'">'+d.replace(' County','')+'</span>').join('');
   c.querySelectorAll('.chip').forEach(chip=>{
-    if(chip.dataset.district!=='all'){chip.style.setProperty('--dc',DISTRICT_COLORS[chip.dataset.district]);}
-    chip.addEventListener('click',()=>{c.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));chip.classList.add('active');
+    chip.addEventListener('click',()=>{c.querySelectorAll('.chip').forEach(x=>{x.classList.remove('active');if(x.dataset.district!=='all')x.style.background='white';});chip.classList.add('active');
       if(chip.dataset.district!=='all')chip.style.background=DISTRICT_COLORS[chip.dataset.district];
-      c.querySelectorAll('.chip').forEach(x=>{if(x!==chip&&x.dataset.district!=='all')x.style.background='white';});
       state.district=chip.dataset.district;applyFilters();});
   });
 }
@@ -670,7 +656,6 @@ function initControls(){
   document.getElementById('addr-input').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();checkAddress();}});
 }
 
-/* ================= MOBILE ================= */
 const MOBILE_MQ=window.matchMedia('(max-width:768px)');
 function setView(view){
   document.body.classList.remove('view-map','view-list');document.body.classList.add('view-'+view);
@@ -689,7 +674,6 @@ function initMobile(){
   MOBILE_MQ.addEventListener('change',e=>{if(e.matches){setView('map');controls.classList.add('collapsed');}else{document.body.classList.remove('view-map','view-list');}if(map)setTimeout(()=>map.invalidateSize(),60);});
 }
 
-/* ================= DRAWERS + SWIPE ================= */
 function openDrawer(id){
   document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));
   const d=document.getElementById(id);if(!d)return;
@@ -722,7 +706,6 @@ function initDrawerSwipe(){
   });
 }
 
-/* ================= DRIVE-TIME AREA ================= */
 let isoLayer=null;
 const BAND_COLORS={15:'#059669',30:'#d97706',45:'#dc2626'};
 function isoStatus(cls,html){const el=document.getElementById('iso-status');el.className=cls||'';el.innerHTML=html;el.style.display=cls?'block':'none';}
@@ -770,7 +753,6 @@ function initDriveTime(){
   document.getElementById('btn-clear-iso').addEventListener('click',clearIso);
 }
 
-/* ================= BOOTSTRAP ================= */
 function bootstrap(){
   if(typeof L==='undefined'){document.getElementById('map').innerHTML='<div style="padding:40px;text-align:center;color:#92400e;"><b>The map engine (Leaflet) is blocked on this network.</b><br><br>Open from a home / personal network.</div>';return;}
   initMap();renderList();renderDistrictChips();initControls();initMobile();initDrawers();initDriveTime();applyFilters();
