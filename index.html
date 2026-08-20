@@ -49,8 +49,6 @@
   .legend-swatch{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:middle;border:1px solid rgba(0,0,0,.2);}
   .legend-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle;}
   .legend-diamond{display:inline-block;width:9px;height:9px;margin-right:8px;transform:rotate(45deg);vertical-align:middle;}
-
-  /* Address panel */
   #addr-panel{border:1px solid #cfe0d3;background:#f4fbf6;border-radius:8px;padding:10px;margin-bottom:10px;}
   .ap-title{font-size:.82rem;font-weight:700;color:#166534;margin-bottom:6px;}
   .ap-desc{font-size:.72rem;color:var(--muted);line-height:1.4;margin-bottom:8px;}
@@ -68,8 +66,6 @@
   #addr-status{font-size:.72rem;margin-top:6px;padding:6px 8px;border-radius:6px;display:none;}
   #addr-status.warn{background:#fef3c7;color:#92400e;display:block;}
   #addr-status.err{background:#fee2e2;color:#991b1b;display:block;}
-
-  /* Zone panel */
   #zone-panel .zp-title{font-size:.82rem;font-weight:700;color:#1e3a8a;margin-bottom:6px;}
   #zone-panel .zp-desc{font-size:.72rem;color:var(--muted);line-height:1.4;margin-bottom:8px;}
   #zone-panel button,#zone-panel label.filebtn{display:block;width:100%;text-align:center;padding:8px;border-radius:6px;font-size:.8rem;font-weight:600;cursor:pointer;margin-bottom:6px;border:1px solid #1d4ed8;background:#1d4ed8;color:white;}
@@ -86,14 +82,10 @@
   #zone-diag .zd-file{background:#fef3c7;color:#92400e;}
   .zp-links{font-size:.7rem;line-height:1.6;margin-top:6px;}
   .zp-links a{color:#1d4ed8;font-weight:600;text-decoration:none;}
-
   #tile-status{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:1200;background:#fef3c7;color:#92400e;border:1px solid #fbbf24;padding:8px 14px;border-radius:8px;font-size:.82rem;max-width:520px;box-shadow:0 2px 10px rgba(0,0,0,.15);display:none;}
   footer{padding:7px 16px;font-size:.71rem;color:var(--muted);background:white;border-top:1px solid #e5e7eb;flex-shrink:0;}
-
   #view-toggle{display:none;}
   #filter-toggle{display:none;}
-
-  /* Toolbar + drawers */
   #map-toolbar{position:absolute;top:78px;left:10px;z-index:1200;display:flex;flex-direction:column;gap:8px;}
   .mt-btn{width:42px;height:42px;border-radius:10px;border:none;background:white;box-shadow:0 1px 6px rgba(0,0,0,.3);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:transform .1s,box-shadow .1s;}
   .mt-btn:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.35);}
@@ -114,7 +106,6 @@
   #iso-status.warn{background:#fef3c7;color:#92400e;display:block;}
   #iso-status.err{background:#fee2e2;color:#991b1b;display:block;}
   #legend-markers,#legend-zones{font-size:.82rem;line-height:1.6;}
-
   @media (max-width:768px){
     html,body{overflow:hidden;overscroll-behavior:none;position:fixed;width:100%;height:100%;}
     header h1{font-size:.95rem;line-height:1.25;}
@@ -136,7 +127,6 @@
     #controls input[type=text]{padding:11px;font-size:1rem;}
     #filter-toggle{display:block;width:100%;margin-top:2px;padding:8px;border:1px solid #d1d5db;border-radius:6px;background:#f8fafc;font-size:.8rem;font-weight:600;color:var(--muted);cursor:pointer;}
     #controls.collapsed .filter-group{display:none;}
-    /* Toolbar sits ABOVE the bottom tab bar, floated out of the map stacking context */
     #map-toolbar{position:fixed;top:auto;bottom:56px;left:50%;transform:translateX(-50%);flex-direction:row;gap:10px;z-index:1550;background:rgba(255,255,255,.92);padding:6px 8px;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.25);}
     body.view-list #map-toolbar{display:none;}
     .mt-btn{width:48px;height:48px;font-size:22px;touch-action:manipulation;}
@@ -149,6 +139,7 @@
   @media (max-width:400px){ header p{display:none;} }
 </style>
 </head>
+
 <body class="view-map">
 <div id="app">
   <header>
@@ -186,7 +177,6 @@
         <button class="mt-btn" data-drawer="drawer-legend" title="Legend">ℹ️</button>
       </div>
       <div id="drawer-backdrop"></div>
-
       <div class="drawer" id="drawer-address">
         <div class="drawer-head"><span>📍 Check an address</span><button class="drawer-close" data-close>✕</button></div>
         <div class="drawer-body"><div id="addr-panel">
@@ -200,7 +190,6 @@
           <div id="addr-result"></div>
         </div></div>
       </div>
-
       <div class="drawer" id="drawer-zones">
         <div class="drawer-head"><span>🗺️ Attendance zones</span><button class="drawer-close" data-close>✕</button></div>
         <div class="drawer-body"><div id="zone-panel">
@@ -231,7 +220,6 @@
           </div>
         </div></div>
       </div>
-
       <div class="drawer" id="drawer-drive">
         <div class="drawer-head"><span>🚙 Drive-time area</span><button class="drawer-close" data-close>✕</button></div>
         <div class="drawer-body">
@@ -249,7 +237,6 @@
           <div id="iso-status"></div>
         </div>
       </div>
-
       <div class="drawer" id="drawer-legend">
         <div class="drawer-head"><span>ℹ️ Legend</span><button class="drawer-close" data-close>✕</button></div>
         <div class="drawer-body"><div id="legend-markers"></div><div id="legend-zones" style="margin-top:12px;"></div></div>
@@ -261,11 +248,11 @@
     <button id="btn-list">📋 List</button>
   </div>
   <footer>
-    School data: Niche, U.S. News, GreatSchools, Public School Review, SchoolDigger (2026). Attendance-zone geometry is loaded live from county GIS or from files you provide — authoritative but subject to change; always confirm with the district's official "Find My School" lookup before buying. Drive times are estimates. Basemap © OpenStreetMap / Carto / Esri.
+    School data: Niche, U.S. News, GreatSchools, Public School Review, SchoolDigger (2026). County outlines © US Census (TIGER). Attendance-zone geometry is loaded live from county GIS or from files you provide — authoritative but subject to change; always confirm with the district's official "Find My School" lookup before buying. Drive times are estimates. Basemap © OpenStreetMap / Carto / Esri.
   </footer>
 </div>
-
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script>
 const ORIGIN=[33.9698,-84.2214];
 const DISTRICT_COLORS={"Gwinnett County":"#2563eb","Fulton County":"#dc2626","Forsyth County":"#059669","DeKalb County":"#7c3aed","Buford City":"#ea580c","Cobb County":"#0891b2","Cherokee County":"#db2777"};
@@ -281,31 +268,17 @@ function districtGroup(d){
 }
 function districtColor(d){return DISTRICT_COLORS[districtGroup(d)]||"#374151";}
 function nicheGradeClass(g){if(!g)return"";if(g.startsWith("A"))return"grade-A";if(g.startsWith("B"))return"grade-B";return"grade-C";}
-
 const SCHOOLS=[{"name": "Gwinnett School of Mathematics, Science & Technology (GSMST)", "lat": 33.9573, "lon": -83.9932, "district": "Gwinnett County", "city": "Lawrenceville", "enrollment": 1304, "ratio": "17:1", "niche": "A+", "niche_rank": "#1 Best Public HS in GA", "usnews_state": 1, "usnews_natl": 7, "specialty": "Selective STEM magnet (application/audition admission); 100% AP participation; #1 in Georgia and top-10 nationally.", "drive": "~25-30 min", "tier": "magnet"}, {"name": "Paul Duke STEM High School", "lat": 33.9519, "lon": -84.2229, "district": "Gwinnett County", "city": "Norcross", "enrollment": 1508, "ratio": "18:1", "niche": "A+", "niche_rank": "#4 Best Public HS, Gwinnett County", "usnews_state": 21, "usnews_natl": 659, "specialty": "Project-based STEM, AP Capstone, nationally recognized VEX Robotics, 2025 National ESEA Distinguished School.", "drive": "~5-10 min", "tier": "magnet"}, {"name": "Norcross High School", "lat": 33.9672, "lon": -84.2121, "district": "Gwinnett County", "city": "Norcross / Peachtree Corners", "enrollment": 2317, "ratio": "14:1", "niche": "B", "niche_rank": "Ranked top 50% in GA", "usnews_state": 195, "usnews_natl": 7957, "specialty": "Home HS for Peachtree Corners; IB Diploma Programme; Georgia AP Honor School in 6 categories.", "drive": "~5 min (local zoned school)", "tier": "comprehensive"}, {"name": "Meadowcreek High School", "lat": 33.927, "lon": -84.1652, "district": "Gwinnett County", "city": "Norcross", "enrollment": 2640, "ratio": "13.6:1", "niche": "C+", "niche_rank": "Large, diverse comprehensive HS", "usnews_state": 326, "usnews_natl": 13427, "specialty": "Nationally recognized Culinary Management CTAE pathway; highly diverse student population.", "drive": "~10-15 min", "tier": "comprehensive"}, {"name": "Duluth High School", "lat": 34.0029, "lon": -84.1349, "district": "Gwinnett County", "city": "Duluth", "enrollment": 2556, "ratio": "16:1", "niche": "A", "niche_rank": "#11 Most Diverse Public HS in GA", "usnews_state": 108, "usnews_natl": 4110, "specialty": "Strong dual-enrollment, broad AP catalog, one of the most diverse student bodies in the state.", "drive": "~10-15 min", "tier": "comprehensive"}, {"name": "McClure Health Science High School", "lat": 34.0067, "lon": -84.133, "district": "Gwinnett County", "city": "Duluth", "enrollment": 1171, "ratio": "16:1", "niche": "B+", "niche_rank": "Georgia rank #59", "usnews_state": 59, "usnews_natl": 2408, "specialty": "Health-science magnet preparing students for medical & allied-health careers via clinical partnerships.", "drive": "~15 min", "tier": "magnet"}, {"name": "Peachtree Ridge High School", "lat": 34.0129, "lon": -84.0873, "district": "Gwinnett County", "city": "Suwanee", "enrollment": 2605, "ratio": "16.8:1", "niche": "A-", "niche_rank": "Georgia rank #49", "usnews_state": 49, "usnews_natl": 1987, "specialty": "Renowned band & fine-arts program; strong AP participation and college-prep culture.", "drive": "~15-20 min", "tier": "comprehensive"}, {"name": "Collins Hill High School", "lat": 34.0089, "lon": -84.0704, "district": "Gwinnett County", "city": "Suwanee", "enrollment": 2485, "ratio": "17:1", "niche": "A", "niche_rank": "Georgia rank #85", "usnews_state": 85, "usnews_natl": 3474, "specialty": "Strong performing-arts and science proficiency (top 20% in GA for science); diverse student body.", "drive": "~20 min", "tier": "comprehensive"}, {"name": "North Gwinnett High School", "lat": 34.0523, "lon": -84.0715, "district": "Gwinnett County", "city": "Suwanee", "enrollment": 3033, "ratio": "18.5:1", "niche": "A", "niche_rank": "Georgia rank #16-21 (top 50 in GA)", "usnews_state": 21, "usnews_natl": 527, "specialty": "Large comprehensive school with nationally recognized marching band and strong AP curriculum.", "drive": "~20-25 min", "tier": "comprehensive"}, {"name": "Central Gwinnett High School", "lat": 33.9556, "lon": -83.9976, "district": "Gwinnett County", "city": "Lawrenceville", "enrollment": 2444, "ratio": "14.6:1", "niche": "B", "niche_rank": "Georgia rank #182", "usnews_state": 182, "usnews_natl": 7319, "specialty": "Comprehensive school with CTAE career pathways; diverse population.", "drive": "~25 min", "tier": "comprehensive"}, {"name": "Discovery High School", "lat": 33.9187, "lon": -83.9927, "district": "Gwinnett County", "city": "Lawrenceville", "enrollment": 2730, "ratio": "15.6:1", "niche": "B", "niche_rank": "Georgia rank #164", "usnews_state": 164, "usnews_natl": 6952, "specialty": "Comprehensive high school with strong CTAE offerings.", "drive": "~25 min", "tier": "comprehensive"}, {"name": "Mountain View High School", "lat": 33.9364, "lon": -84.0189, "district": "Gwinnett County", "city": "Lawrenceville", "enrollment": 2285, "ratio": "17.1:1", "niche": "A-", "niche_rank": "Georgia rank #69 (top 50 in GA)", "usnews_state": 69, "usnews_natl": 2723, "specialty": "Strong fine-arts and STEM offerings; consistently in Georgia's top 50 high schools.", "drive": "~25-30 min", "tier": "comprehensive"}, {"name": "Archer High School", "lat": 33.9187, "lon": -83.9958, "district": "Gwinnett County", "city": "Lawrenceville", "enrollment": 3073, "ratio": "19.3-20:1", "niche": "A", "niche_rank": "#66 Best Public HS in GA", "usnews_state": 52, "usnews_natl": 2154, "specialty": "Large, diverse comprehensive school; strong athletics; top-20% in GA for reading & math.", "drive": "~30 min", "tier": "comprehensive"}, {"name": "Berkmar High School", "lat": 33.9127, "lon": -84.1207, "district": "Gwinnett County", "city": "Lilburn", "enrollment": 3089, "ratio": "15.5:1", "niche": "B", "niche_rank": "Georgia rank #271", "usnews_state": 271, "usnews_natl": 11008, "specialty": "Nationally recognized Culinary Arts CTAE program; highly diverse.", "drive": "~15-20 min", "tier": "comprehensive"}, {"name": "Parkview High School", "lat": 33.8944, "lon": -84.0968, "district": "Gwinnett County", "city": "Lilburn", "enrollment": 3216, "ratio": "19:1", "niche": "A", "niche_rank": "#9 Best Public HS, Gwinnett County", "usnews_state": 53, "usnews_natl": 2180, "specialty": "One of Gwinnett's largest schools; strong band, athletics and CTAE pathways.", "drive": "~20-25 min", "tier": "comprehensive"}, {"name": "Brookwood High School", "lat": 33.8865, "lon": -84.0006, "district": "Gwinnett County", "city": "Snellville", "enrollment": 3880, "ratio": "18.5:1", "niche": "A-", "niche_rank": "Georgia rank #36 (top 50 in GA)", "usnews_state": 36, "usnews_natl": 1360, "specialty": "One of the largest high schools in Georgia; strong band program and broad AP catalog.", "drive": "~30 min", "tier": "comprehensive"}, {"name": "Mill Creek High School", "lat": 34.0665, "lon": -83.8493, "district": "Gwinnett County", "city": "Hoschton/Dacula", "enrollment": 2745, "ratio": "16.9:1", "niche": "A-", "niche_rank": "Georgia rank #37 (top 50 in GA)", "usnews_state": 37, "usnews_natl": 1433, "specialty": "One of Georgia's largest and highest-achieving comprehensive HS; nationally recognized band & orchestra.", "drive": "~40-45 min (edge of range)", "tier": "comprehensive"}, {"name": "Dacula High School", "lat": 34.0004, "lon": -83.906, "district": "Gwinnett County", "city": "Dacula", "enrollment": 2534, "ratio": "17.9:1", "niche": "B+", "niche_rank": "Georgia rank #87 (top 100 in GA)", "usnews_state": 87, "usnews_natl": 3506, "specialty": "Comprehensive HS with strong CTAE and agricultural-education programs.", "drive": "~30-35 min", "tier": "comprehensive"}, {"name": "Lanier High School", "lat": 34.0859, "lon": -84.0332, "district": "Gwinnett County", "city": "Sugar Hill", "enrollment": 1871, "ratio": "17:1", "niche": "A-", "niche_rank": "Georgia rank #55-57 (top 50 in GA)", "usnews_state": 57, "usnews_natl": 2073, "specialty": "Comprehensive school with top-5% science proficiency in Georgia.", "drive": "~30 min", "tier": "comprehensive"}, {"name": "Seckinger High School", "lat": 34.0794, "lon": -83.9118, "district": "Gwinnett County", "city": "Buford", "enrollment": 1923, "ratio": "n/a", "niche": "A-", "niche_rank": "Georgia rank #71 (top 100 in GA)", "usnews_state": 71, "usnews_natl": 2865, "specialty": "Newest GCPS high school (opened 2022); modern STEM-focused facilities.", "drive": "~30-35 min", "tier": "comprehensive"}, {"name": "Buford High School", "lat": 34.1224, "lon": -83.9945, "district": "Buford City", "city": "Buford", "enrollment": 1966, "ratio": "17:1", "niche": "A+", "niche_rank": "#10 Best Public HS in GA; #1 for Athletes", "usnews_state": 23, "usnews_natl": 239, "specialty": "Statewide athletics powerhouse with strong academics; independent city school district.", "drive": "~30-35 min", "tier": "comprehensive"}, {"name": "Johns Creek High School", "lat": 34.0299, "lon": -84.1979, "district": "Fulton County", "city": "Johns Creek/Alpharetta", "enrollment": 1789, "ratio": "18:1", "niche": "A+", "niche_rank": "#13 Best Public HS in GA", "usnews_state": 23, "usnews_natl": 770, "specialty": "Top-5% math/reading proficiency in GA; strong STEM & college-readiness (#4 in Fulton).", "drive": "~20-25 min", "tier": "comprehensive"}, {"name": "Chattahoochee High School", "lat": 34.0201, "lon": -84.2434, "district": "Fulton County", "city": "Alpharetta/Johns Creek", "enrollment": 1730, "ratio": "16:1", "niche": "A+", "niche_rank": "#6 Best Public HS in GA", "usnews_state": 6, "usnews_natl": null, "specialty": "IB Diploma Programme alongside AP; #3 for best teachers in GA.", "drive": "~25-30 min", "tier": "comprehensive"}, {"name": "Northview High School", "lat": 34.0391, "lon": -84.1777, "district": "Fulton County", "city": "Johns Creek/Duluth", "enrollment": 1591, "ratio": "17:1", "niche": "A+", "niche_rank": "#5 Best Public HS in GA", "usnews_state": 7, "usnews_natl": 248, "specialty": "#1 in Fulton County; dual enrollment with Georgia Tech, Kennesaw State & Gwinnett Tech; ~100 clubs.", "drive": "~15-20 min", "tier": "comprehensive"}, {"name": "Milton High School", "lat": 34.1265, "lon": -84.2865, "district": "Fulton County", "city": "Alpharetta/Milton", "enrollment": 1999, "ratio": "18:1", "niche": "A+", "niche_rank": "#8 Best Public HS in GA", "usnews_state": 8, "usnews_natl": null, "specialty": "IB Diploma Programme; #9 in GA for athletics and #10 for teacher quality; Blue Ribbon School.", "drive": "~30-35 min", "tier": "comprehensive"}, {"name": "Roswell High School", "lat": 34.0264, "lon": -84.3319, "district": "Fulton County", "city": "Roswell", "enrollment": 2035, "ratio": "16:1", "niche": "B+", "niche_rank": "Georgia rank #72", "usnews_state": 72, "usnews_natl": 2680, "specialty": "Strong science proficiency (top 10% in GA); long-standing arts programs.", "drive": "~30-35 min", "tier": "comprehensive"}, {"name": "Alpharetta High School", "lat": 34.0742, "lon": -84.2553, "district": "Fulton County", "city": "Alpharetta", "enrollment": 2024, "ratio": "17:1", "niche": "A+", "niche_rank": "#7 Best Public HS in GA", "usnews_state": 20, "usnews_natl": 622, "specialty": "A 'best all-around' metro Atlanta school; top-10% in GA with strong AP participation.", "drive": "~20-25 min", "tier": "comprehensive"}, {"name": "Cambridge High School", "lat": 34.095, "lon": -84.305, "district": "Fulton County", "city": "Milton/Alpharetta", "enrollment": 1602, "ratio": "16:1", "niche": "A", "niche_rank": "Top-10% in GA (10/10)", "usnews_state": null, "usnews_natl": null, "specialty": "Opened 2012 to relieve Alpharetta & Milton; top-5% in GA for reading and science.", "drive": "~25-30 min", "tier": "comprehensive"}, {"name": "Centennial High School", "lat": 34.043, "lon": -84.276, "district": "Fulton County", "city": "Roswell", "enrollment": 1783, "ratio": "17:1", "niche": "B+", "niche_rank": "Georgia rank ~#95", "usnews_state": 95, "usnews_natl": null, "specialty": "Comprehensive north-Fulton school with a dedicated arts/IB feeder tradition and strong CTAE.", "drive": "~25-30 min", "tier": "comprehensive"}, {"name": "Lambert High School", "lat": 34.0937, "lon": -84.1046, "district": "Forsyth County", "city": "Suwanee", "enrollment": 3249, "ratio": "19:1", "niche": "A+", "niche_rank": "Georgia rank ~#10-21 (top 5% in GA)", "usnews_state": null, "usnews_natl": null, "specialty": "Large, high-achieving comprehensive HS with 31 AP course offerings.", "drive": "~25-30 min", "tier": "comprehensive"}, {"name": "South Forsyth High School", "lat": 34.1046, "lon": -84.1382, "district": "Forsyth County", "city": "Cumming", "enrollment": 2634, "ratio": "19:1", "niche": "A+", "niche_rank": "#12 Best Public HS in GA", "usnews_state": 20, "usnews_natl": 689, "specialty": "Top-5% science proficiency in GA (80%); one of the fastest-rising schools in Georgia.", "drive": "~30-35 min", "tier": "comprehensive"}, {"name": "Alliance Academy for Innovation", "lat": 34.2188, "lon": -84.1156, "district": "Forsyth County (Charter)", "city": "Cumming", "enrollment": 1145, "ratio": "n/a", "niche": "A+", "niche_rank": "#3 Best HS in Georgia (SchoolDigger)", "usnews_state": null, "usnews_natl": null, "specialty": "Innovative charter emphasizing project-based, entrepreneurial learning; top proficiency in Forsyth.", "drive": "~35-40 min", "tier": "magnet"}, {"name": "Chamblee High School (Chamblee Charter)", "lat": 33.8879, "lon": -84.3096, "district": "DeKalb County (Charter)", "city": "Chamblee", "enrollment": 1829, "ratio": "17:1", "niche": "A", "niche_rank": "#2 Best Public HS, DeKalb County", "usnews_state": 38, "usnews_natl": 1456, "specialty": "Charter with rigorous academics; strong reading/language-arts proficiency (top 10% in GA).", "drive": "~20-25 min", "tier": "comprehensive"}, {"name": "Dunwoody High School", "lat": 33.937, "lon": -84.3157, "district": "DeKalb County", "city": "Dunwoody", "enrollment": 1974, "ratio": "16:1", "niche": "A", "niche_rank": "#5 Best Public HS, DeKalb County", "usnews_state": null, "usnews_natl": null, "specialty": "Comprehensive school with strong reading proficiency (top 20% in GA) and STEM offerings.", "drive": "~15-20 min", "tier": "comprehensive"}, {"name": "Lakeside High School", "lat": 33.8457, "lon": -84.2849, "district": "DeKalb County", "city": "Atlanta (North Druid Hills)", "enrollment": 2186, "ratio": "17:1", "niche": "B+", "niche_rank": "Georgia rank #120", "usnews_state": 120, "usnews_natl": 4648, "specialty": "Dedicated performing-arts building; historically strong AP participation and diverse student body.", "drive": "~20-25 min", "tier": "comprehensive"}, {"name": "Walton High School", "lat": 34.03, "lon": -84.418, "district": "Cobb County", "city": "Marietta (East Cobb)", "enrollment": 2705, "ratio": "19:1", "niche": "A+", "niche_rank": "#1 Best Public HS, Cobb County", "usnews_state": 6, "usnews_natl": 220, "specialty": "Blue Ribbon School, #1 in Cobb, top-5% in GA for math/reading/science; strong STEM.", "drive": "~35-40 min", "tier": "comprehensive"}, {"name": "Lassiter High School", "lat": 34.052, "lon": -84.452, "district": "Cobb County", "city": "Marietta (East Cobb)", "enrollment": 2005, "ratio": "18:1", "niche": "A+", "niche_rank": "#2 Best Public HS, Cobb County", "usnews_state": 11, "usnews_natl": 321, "specialty": "Top-5% in GA; renowned performing-arts and band program.", "drive": "~35-40 min", "tier": "comprehensive"}, {"name": "Pope High School", "lat": 34.045, "lon": -84.435, "district": "Cobb County", "city": "Marietta (East Cobb)", "enrollment": 1793, "ratio": "17:1", "niche": "A+", "niche_rank": "#3 Best Public HS, Cobb County", "usnews_state": 24, "usnews_natl": 702, "specialty": "Top-5% in GA for math and reading; AP School of Distinction; ~100% graduation.", "drive": "~35-40 min", "tier": "comprehensive"}, {"name": "Wheeler High School", "lat": 33.96, "lon": -84.4784, "district": "Cobb County", "city": "Marietta", "enrollment": 2380, "ratio": "17:1", "niche": "A", "niche_rank": "#3 in Cobb (Niche)", "usnews_state": 48, "usnews_natl": 1913, "specialty": "Home of the Wheeler Magnet \u2014 selective Center for Advanced Studies in Science, Math & Technology.", "drive": "~30-35 min", "tier": "magnet"}, {"name": "Sprayberry High School", "lat": 34.02, "lon": -84.468, "district": "Cobb County", "city": "Marietta", "enrollment": 1841, "ratio": "18:1", "niche": "A-", "niche_rank": "#10 Best Public HS, Cobb County", "usnews_state": 69, "usnews_natl": null, "specialty": "AP STEM & Humanities Honor School; strong CTAE career pathways.", "drive": "~35 min", "tier": "comprehensive"}, {"name": "Kell High School", "lat": 34.065, "lon": -84.47, "district": "Cobb County", "city": "Marietta", "enrollment": 1514, "ratio": "18:1", "niche": "A-", "niche_rank": "Georgia rank ~#78", "usnews_state": 78, "usnews_natl": null, "specialty": "AP STEM & Humanities Honor School; strong arts and athletics.", "drive": "~35-40 min", "tier": "comprehensive"}, {"name": "Marietta High School", "lat": 33.951, "lon": -84.56, "district": "Cobb County (Marietta City)", "city": "Marietta", "enrollment": 2595, "ratio": "16:1", "niche": "B+", "niche_rank": "Marietta City Schools flagship", "usnews_state": null, "usnews_natl": null, "specialty": "Only HS in the independent Marietta City district; full IB World School with Center for Advanced Academics.", "drive": "~35-40 min", "tier": "magnet"}, {"name": "River Ridge High School", "lat": 34.1161, "lon": -84.4807, "district": "Cherokee County", "city": "Woodstock", "enrollment": 1902, "ratio": "16:1", "niche": "A-", "niche_rank": "#1 Best Public HS, Cherokee County", "usnews_state": 64, "usnews_natl": 2668, "specialty": "Top-ranked Cherokee school (SchoolDigger 5-star, #34 in GA); strong balanced proficiency.", "drive": "~35-45 min", "tier": "comprehensive"}, {"name": "Woodstock High School", "lat": 34.101, "lon": -84.548, "district": "Cherokee County", "city": "Woodstock", "enrollment": 2006, "ratio": "16:1", "niche": "A-", "niche_rank": "#2 Best Public HS, Cherokee County", "usnews_state": null, "usnews_natl": null, "specialty": "96% graduation; strong Biology Milestones; biggest statewide ranking riser in 2026.", "drive": "~35-45 min", "tier": "comprehensive"}, {"name": "Etowah High School", "lat": 34.128, "lon": -84.509, "district": "Cherokee County", "city": "Woodstock", "enrollment": 2393, "ratio": "16:1", "niche": "B+", "niche_rank": "Georgia rank ~#62 (SchoolDigger)", "usnews_state": null, "usnews_natl": null, "specialty": "Large Towne Lake-area school with strong Biology proficiency and broad CTAE pathways.", "drive": "~40-45 min (edge of range)", "tier": "comprehensive"}];
-const DISTRICT_POLYGONS={"Gwinnett County": [[34.098, -84.15], [34.166, -84.02], [34.095, -83.815], [33.96, -83.78], [33.79, -83.83], [33.8, -84.02], [33.88, -84.23], [33.985, -84.245], [34.098, -84.15]], "Fulton County": [[34.365, -84.285], [34.135, -84.11], [33.945, -84.23], [33.845, -84.28], [33.75, -84.29], [33.6, -84.35], [33.45, -84.48], [33.35, -84.58], [33.45, -84.72], [33.6, -84.7], [33.75, -84.65], [33.85, -84.58], [33.95, -84.47], [34.05, -84.4], [34.15, -84.34], [34.28, -84.31], [34.365, -84.285]], "Forsyth County": [[34.335, -84.185], [34.28, -84.06], [34.15, -83.98], [34.05, -84.05], [34.0, -84.15], [34.02, -84.28], [34.15, -84.33], [34.28, -84.3], [34.335, -84.185]], "DeKalb County": [[33.965, -84.365], [33.9, -84.23], [33.855, -84.115], [33.775, -84.02], [33.65, -84.05], [33.65, -84.2], [33.7, -84.35], [33.83, -84.4], [33.965, -84.365]], "Buford City": [[34.135, -83.965], [34.14, -83.985], [34.128, -84.01], [34.108, -84.005], [34.1, -83.978], [34.112, -83.955], [34.135, -83.965]], "Cobb County": [[34.135, -84.61], [34.135, -84.42], [34.02, -84.37], [33.9, -84.4], [33.8, -84.52], [33.82, -84.62], [33.95, -84.68], [34.08, -84.66], [34.135, -84.61]], "Cherokee County": [[34.55, -84.66], [34.55, -84.33], [34.36, -84.29], [34.15, -84.33], [34.075, -84.45], [34.085, -84.6], [34.15, -84.71], [34.32, -84.73], [34.55, -84.66]]};
-
+const DISTRICT_POLYGONS={"Gwinnett County": [[[33.77276, -84.058306], [33.775033, -84.070965], [33.777507, -84.075914], [33.799506, -84.097915], [33.801739999999995, -84.10405899999999], [33.807505, -84.11341499999999], [33.830504999999995, -84.132716], [33.835256, -84.134852], [33.842563999999996, -84.148337], [33.853204, -84.157817], [33.857516, -84.172139], [33.864402999999996, -84.179418], [33.865514999999995, -84.187005], [33.871348, -84.19729], [33.873003, -84.203519], [33.877003, -84.20472], [33.884202, -84.21632], [33.901983, -84.232204], [33.911601, -84.252421], [33.914401, -84.256022], [33.918901, -84.259822], [33.944853, -84.272216], [33.947576999999995, -84.266306], [33.9559, -84.27192199999999], [33.954201, -84.275722], [33.9577, -84.276822], [33.958839999999995, -84.27249499999999], [33.963775999999996, -84.267622], [33.968184, -84.258089], [33.973676, -84.262849], [33.9772, -84.261597], [33.986588, -84.26308], [33.987536999999996, -84.26013499999999], [33.9861, -84.25466899999999], [33.992481999999995, -84.24959799999999], [33.996204999999996, -84.24974499999999], [33.998605, -84.24749899999999], [33.999403, -84.240505], [34.004011, -84.227615], [34.003785, -84.21248899999999], [33.9973, -84.20218299999999], [33.994172, -84.201313], [33.99188, -84.20456], [33.989695, -84.202767], [33.991451999999995, -84.19170299999999], [33.994831999999995, -84.18515699999999], [33.998922, -84.18101999999999], [34.008094, -84.179799], [34.0206, -84.175286], [34.025566999999995, -84.17203599999999], [34.028814, -84.168106], [34.032311, -84.156532], [34.03037, -84.150807], [34.029717, -84.14272199999999], [34.033488999999996, -84.123465], [34.036586, -84.116316], [34.041967, -84.112326], [34.049609, -84.098205], [34.051581, -84.098135], [34.054787999999995, -84.106212], [34.057169, -84.108682], [34.062638, -84.111288], [34.064616, -84.113717], [34.065564, -84.117927], [34.070788, -84.116783], [34.076338, -84.1134], [34.086396, -84.113568], [34.09254, -84.10990199999999], [34.098423, -84.109894], [34.104554, -84.101913], [34.116433, -84.101615], [34.118783, -84.09801499999999], [34.122931, -84.09750000000001], [34.126273, -84.09334299999999], [34.132222999999996, -84.094805], [34.134418, -84.09158], [34.143159, -84.085129], [34.146341, -84.08651499999999], [34.148314, -84.085809], [34.157782, -84.076515], [34.163686999999996, -84.074624], [34.167873, -84.06284099999999], [34.099601, -83.871704], [34.100525999999995, -83.870662], [34.098506, -83.867656], [34.127493, -83.81768199999999], [34.004315999999996, -83.869115], [34.003634, -83.866247], [33.997029999999995, -83.860603], [33.994082, -83.856415], [33.98444, -83.83923], [33.982203999999996, -83.837311], [33.965944, -83.83152], [33.964166999999996, -83.824235], [33.953139, -83.812991], [33.949479, -83.813448], [33.942231, -83.804932], [33.937371, -83.80589599999999], [33.93322, -83.803291], [33.929843999999996, -83.799104], [33.752808, -84.023713], [33.757708, -84.040313], [33.762307, -84.043313], [33.766708, -84.052115], [33.77276, -84.058306]]], "Fulton County": [[[34.008094, -84.179799], [34.000395999999995, -84.18030999999999], [33.994831999999995, -84.18515699999999], [33.991451999999995, -84.19170299999999], [33.989695, -84.202767], [33.99188, -84.20456], [33.994172, -84.201313], [33.9973, -84.20218299999999], [34.003785, -84.21248899999999], [34.004011, -84.227615], [33.999403, -84.240505], [33.998605, -84.24749899999999], [33.996204999999996, -84.24974499999999], [33.992481999999995, -84.24959799999999], [33.9861, -84.25466899999999], [33.987536999999996, -84.26013499999999], [33.986393, -84.26317499999999], [33.9772, -84.261597], [33.973676, -84.262849], [33.968184, -84.258089], [33.963775999999996, -84.267622], [33.958839999999995, -84.27249499999999], [33.956019999999995, -84.280497], [33.959525, -84.29341], [33.959343, -84.299824], [33.965404, -84.31329199999999], [33.967664, -84.32697399999999], [33.970873, -84.33725], [33.968914, -84.33863099999999], [33.969538, -84.340693], [33.96582, -84.345807], [33.967800000000004, -84.34752499999999], [33.776906, -84.34832399999999], [33.647908, -84.350224], [33.648759999999996, -84.448303], [33.641208999999996, -84.448227], [33.641208999999996, -84.452766], [33.648876, -84.45302099999999], [33.648514999999996, -84.457728], [33.550933, -84.458665], [33.539218999999996, -84.51323], [33.518214, -84.595136], [33.51379, -84.597966], [33.512197, -84.60054799999999], [33.512507, -84.603867], [33.509814, -84.606708], [33.506988, -84.60791499999999], [33.504568, -84.607264], [33.502511, -84.60954], [33.502513, -84.620831], [33.510712999999996, -84.621031], [33.511758, -84.67010499999999], [33.510016, -84.67097799999999], [33.511097, -84.672314], [33.511469999999996, -84.68002899999999], [33.510638, -84.747924], [33.511457, -84.850713], [33.513183999999995, -84.849311], [33.514691, -84.844286], [33.513329, -84.82761099999999], [33.521194, -84.815057], [33.52465, -84.81516099999999], [33.530636, -84.82100299999999], [33.538571999999995, -84.82487599999999], [33.541804, -84.82755399999999], [33.543222, -84.830613], [33.547061, -84.8326], [33.55442, -84.827345], [33.563376999999996, -84.824445], [33.571627, -84.810192], [33.58642, -84.805655], [33.595591999999996, -84.796536], [33.599302, -84.78849799999999], [33.609662, -84.77559099999999], [33.614211, -84.763097], [33.62791, -84.752935], [33.63021, -84.752735], [33.63181, -84.748835], [33.624399, -84.742589], [33.623348, -84.73964], [33.624613, -84.73571199999999], [33.63131, -84.731534], [33.63651, -84.73003399999999], [33.64181, -84.716734], [33.646409, -84.710534], [33.651109, -84.685833], [33.656473, -84.673941], [33.657008999999995, -84.661433], [33.659409, -84.65643299999999], [33.667909, -84.651933], [33.675208999999995, -84.653733], [33.683609, -84.652733], [33.685908999999995, -84.649033], [33.683809, -84.640833], [33.690308, -84.630533], [33.693115999999996, -84.630117], [33.700312, -84.632131], [33.704508, -84.62123199999999], [33.709607999999996, -84.615732], [33.712908, -84.608032], [33.719708, -84.602532], [33.725029, -84.60077199999999], [33.729006999999996, -84.594332], [33.729113999999996, -84.586826], [33.743507, -84.578132], [33.745506999999996, -84.573432], [33.762406, -84.552633], [33.76979, -84.539598], [33.779122, -84.533546], [33.783305999999996, -84.52913099999999], [33.792806, -84.51073199999999], [33.799405, -84.502631], [33.808541999999996, -84.495126], [33.812819999999995, -84.488964], [33.814705, -84.48333], [33.825905, -84.47133], [33.827404, -84.46843], [33.827113, -84.463293], [33.824504, -84.457629], [33.825804, -84.455829], [33.828806, -84.45513799999999], [33.838947999999995, -84.460324], [33.849035, -84.458714], [33.853204, -84.459829], [33.858764, -84.45436699999999], [33.864703, -84.455929], [33.872805, -84.449857], [33.878702, -84.443229], [33.883801, -84.442627], [33.887416, -84.44419099999999], [33.890511, -84.441413], [33.894196, -84.443618], [33.90004, -84.44170199999999], [33.907899, -84.447299], [33.911938, -84.44648], [33.916188, -84.440592], [33.923165, -84.43587], [33.924889, -84.43045599999999], [33.932299, -84.41742699999999], [33.950216999999995, -84.399127], [33.955963, -84.390625], [33.963253, -84.383389], [33.966921, -84.38305799999999], [33.970233, -84.38465699999999], [33.971917, -84.38332799999999], [33.972649, -84.378716], [33.976551, -84.37612399999999], [33.980602999999995, -84.37539], [33.987147, -84.374944], [33.98997, -84.377319], [33.992804, -84.38332899999999], [33.992714, -84.38644], [33.995522, -84.389839], [33.996947, -84.38758], [33.999840999999996, -84.392788], [34.008313, -84.397821], [34.007894, -84.400487], [34.010673, -84.39954499999999], [34.011747, -84.40102], [34.016861999999996, -84.39823], [34.020432, -84.399546], [34.021876, -84.398248], [34.025794999999995, -84.401325], [34.030606999999996, -84.401625], [34.032334, -84.403973], [34.034797999999995, -84.40243099999999], [34.037220999999995, -84.40508], [34.036316, -84.40715399999999], [34.043654, -84.41172999999999], [34.04927, -84.410837], [34.052389, -84.417937], [34.055166, -84.419134], [34.109043, -84.41842799999999], [34.110346, -84.414914], [34.107974999999996, -84.41145], [34.110099, -84.404033], [34.109666, -84.399541], [34.115214, -84.395009], [34.11461, -84.39353799999999], [34.117663, -84.39164], [34.118238999999996, -84.38832], [34.119585, -84.38794999999999], [34.118763, -84.379295], [34.122567, -84.369552], [34.122318, -84.364947], [34.124212, -84.36177099999999], [34.131634, -84.35972799999999], [34.137024, -84.36133199999999], [34.141362, -84.358852], [34.143701, -84.360001], [34.14868, -84.358879], [34.152969, -84.35983999999999], [34.154682, -84.356825], [34.162319, -84.36053299999999], [34.176778999999996, -84.352249], [34.176099, -84.343316], [34.178982, -84.33706699999999], [34.186144, -84.32826299999999], [34.185908999999995, -84.258743], [34.109505, -84.258918], [34.107254, -84.254774], [34.104293999999996, -84.254092], [34.104662, -84.250543], [34.101447, -84.240704], [34.101346, -84.235405], [34.096993, -84.231477], [34.097142999999996, -84.227465], [34.100429999999996, -84.220295], [34.099143, -84.21375499999999], [34.090679, -84.205969], [34.090118, -84.200373], [34.085467, -84.189388], [34.082557, -84.185585], [34.073052, -84.179783], [34.069694, -84.179204], [34.068737999999996, -84.17114], [34.065944, -84.162264], [34.062571999999996, -84.15933299999999], [34.055040999999996, -84.143768], [34.057184, -84.134177], [34.051597, -84.119671], [34.050654, -84.097692], [34.041967, -84.112326], [34.036586, -84.116316], [34.033488999999996, -84.123465], [34.029717, -84.14272199999999], [34.03037, -84.150807], [34.032311, -84.156532], [34.028814, -84.168106], [34.022881, -84.174005], [34.008094, -84.179799]]], "Forsyth County": [[[34.167873, -84.06284099999999], [34.163686999999996, -84.074624], [34.157782, -84.076515], [34.148314, -84.085809], [34.146341, -84.08651499999999], [34.143159, -84.085129], [34.134418, -84.09158], [34.132222999999996, -84.094805], [34.126273, -84.09334299999999], [34.122931, -84.09750000000001], [34.118783, -84.09801499999999], [34.116433, -84.101615], [34.104554, -84.101913], [34.098423, -84.109894], [34.09254, -84.10990199999999], [34.086396, -84.113568], [34.076338, -84.1134], [34.070788, -84.116783], [34.065564, -84.117927], [34.064616, -84.113717], [34.054787999999995, -84.106212], [34.053385, -84.100731], [34.050654, -84.097692], [34.051597, -84.119671], [34.057184, -84.134177], [34.055040999999996, -84.143768], [34.062571999999996, -84.15933299999999], [34.065944, -84.162264], [34.068737999999996, -84.17114], [34.069694, -84.179204], [34.073052, -84.179783], [34.082557, -84.185585], [34.085467, -84.189388], [34.090118, -84.200373], [34.090679, -84.205969], [34.099143, -84.21375499999999], [34.100429999999996, -84.220295], [34.097142999999996, -84.227465], [34.096993, -84.231477], [34.101346, -84.235405], [34.101447, -84.240704], [34.104662, -84.250543], [34.104293999999996, -84.254092], [34.107254, -84.254774], [34.109505, -84.258918], [34.335156, -84.25807499999999], [34.334011, -83.957077], [34.330894, -83.95232299999999], [34.329448, -83.94514099999999], [34.327262, -83.946441], [34.324794, -83.94563199999999], [34.323181, -83.950447], [34.318168, -83.953239], [34.316341, -83.953193], [34.306796999999996, -83.945083], [34.302023999999996, -83.942619], [34.297554, -83.946754], [34.292079, -83.94170299999999], [34.292293, -83.939819], [34.29877, -83.939567], [34.299437999999995, -83.93701899999999], [34.297798, -83.931358], [34.29652, -83.931564], [34.2947, -83.936286], [34.286049, -83.934151], [34.284915999999996, -83.932442], [34.286327, -83.931122], [34.290081, -83.932152], [34.291053999999995, -83.930893], [34.289916999999996, -83.928513], [34.286418, -83.92559], [34.281768, -83.926239], [34.279289, -83.92742899999999], [34.274764999999995, -83.942604], [34.270042, -83.952072], [34.267509, -83.954116], [34.261587, -83.95052199999999], [34.253791, -83.953605], [34.243839, -83.948966], [34.239837, -83.949821], [34.232654, -83.961044], [34.227953, -83.971952], [34.225975, -83.972351], [34.22274, -83.970254], [34.222208, -83.96559599999999], [34.221022, -83.964461], [34.21574, -83.966977], [34.213177, -83.978779], [34.200136, -83.984894], [34.195732, -83.989059], [34.193943, -83.99301899999999], [34.195254999999996, -84.004089], [34.192329, -84.006851], [34.191189, -84.013695], [34.194935, -84.023788], [34.195312, -84.03070799999999], [34.194263, -84.039024], [34.191223, -84.04871399999999], [34.181629, -84.05909], [34.175506999999996, -84.059494], [34.167873, -84.06284099999999]]], "DeKalb County": [[[33.775033, -84.070965], [33.772767, -84.05820399999999], [33.766708, -84.052115], [33.762307, -84.043313], [33.757708, -84.040313], [33.752808, -84.023713], [33.726608, -84.056614], [33.614666, -84.115791], [33.616811999999996, -84.11695399999999], [33.61857, -84.11541799999999], [33.622319, -84.119072], [33.623664, -84.123503], [33.625416, -84.123738], [33.627528999999996, -84.12850399999999], [33.630162999999996, -84.12849], [33.632129, -84.141195], [33.634710999999996, -84.140886], [33.637668999999995, -84.13832], [33.63632, -84.143866], [33.638577, -84.150581], [33.645569, -84.15423799999999], [33.644481, -84.15861199999999], [33.642464, -84.15849], [33.638031999999995, -84.16081199999999], [33.637799, -84.161992], [33.640736, -84.172792], [33.64466, -84.17184], [33.645903, -84.170176], [33.646572, -84.223952], [33.631414, -84.224217], [33.63073, -84.245453], [33.646921999999996, -84.24577099999999], [33.647908, -84.350224], [33.776906, -84.34832399999999], [33.967800000000004, -84.34752499999999], [33.96582, -84.345807], [33.969538, -84.340693], [33.968914, -84.33863099999999], [33.970873, -84.33725], [33.967664, -84.32697399999999], [33.965404, -84.31329199999999], [33.959343, -84.299824], [33.959525, -84.29341], [33.956019999999995, -84.280497], [33.9577, -84.276822], [33.954201, -84.275722], [33.9559, -84.27192199999999], [33.947576999999995, -84.266306], [33.944853, -84.272216], [33.918901, -84.259822], [33.914401, -84.256022], [33.911601, -84.252421], [33.901983, -84.232204], [33.884202, -84.21632], [33.877003, -84.20472], [33.873003, -84.203519], [33.871348, -84.19729], [33.865514999999995, -84.187005], [33.864402999999996, -84.179418], [33.857516, -84.172139], [33.853204, -84.157817], [33.842563999999996, -84.148337], [33.835256, -84.134852], [33.830504999999995, -84.132716], [33.807505, -84.11341499999999], [33.801739999999995, -84.10405899999999], [33.799506, -84.097915], [33.777507, -84.075914], [33.775033, -84.070965]]], "Cobb County": [[[33.963253, -84.383389], [33.955963, -84.390625], [33.950216999999995, -84.399127], [33.932299, -84.41742699999999], [33.924889, -84.43045599999999], [33.923165, -84.43587], [33.916188, -84.440592], [33.911938, -84.44648], [33.907899, -84.447299], [33.90004, -84.44170199999999], [33.894196, -84.443618], [33.890511, -84.441413], [33.887416, -84.44419099999999], [33.883801, -84.442627], [33.878702, -84.443229], [33.872805, -84.449857], [33.864703, -84.455929], [33.858764, -84.45436699999999], [33.853204, -84.459829], [33.849035, -84.458714], [33.838947999999995, -84.460324], [33.828806, -84.45513799999999], [33.825804, -84.455829], [33.824504, -84.457629], [33.827113, -84.463293], [33.827404, -84.46843], [33.825905, -84.47133], [33.814705, -84.48333], [33.812819999999995, -84.488964], [33.808541999999996, -84.495126], [33.799405, -84.502631], [33.792806, -84.51073199999999], [33.783305999999996, -84.52913099999999], [33.779122, -84.533546], [33.771104, -84.538033], [33.757706999999996, -84.559232], [33.745506999999996, -84.573432], [33.743507, -84.578132], [33.745807, -84.578132], [33.801547, -84.61998799999999], [33.802006, -84.622333], [33.805023999999996, -84.619892], [33.80617, -84.724139], [33.816989, -84.72398], [33.816995, -84.72518099999999], [33.947353, -84.723236], [33.947601999999996, -84.73963599999999], [34.079398999999995, -84.737836], [34.077399, -84.625433], [34.077498999999996, -84.624133], [34.081433, -84.623486], [34.081136, -84.613663], [34.077216, -84.613546], [34.075298, -84.515531], [34.078697999999996, -84.51543099999999], [34.078598, -84.511831], [34.075198, -84.511831], [34.073298, -84.418927], [34.055166, -84.419134], [34.052389, -84.417937], [34.04927, -84.410837], [34.043654, -84.41172999999999], [34.036316, -84.40715399999999], [34.037220999999995, -84.40508], [34.034797999999995, -84.40243099999999], [34.032334, -84.403973], [34.030606999999996, -84.401625], [34.025794999999995, -84.401325], [34.021876, -84.398248], [34.020432, -84.399546], [34.016861999999996, -84.39823], [34.011747, -84.40102], [34.010673, -84.39954499999999], [34.007894, -84.400487], [34.008313, -84.397821], [33.999840999999996, -84.392788], [33.996947, -84.38758], [33.995522, -84.389839], [33.992714, -84.38644], [33.992804, -84.38332899999999], [33.98997, -84.377319], [33.987147, -84.374944], [33.976551, -84.37612399999999], [33.972649, -84.378716], [33.971917, -84.38332799999999], [33.970233, -84.38465699999999], [33.966921, -84.38305799999999], [33.963253, -84.383389]]], "Cherokee County": [[[34.081433, -84.623486], [34.077399, -84.625433], [34.077999, -84.659234], [34.202675, -84.65771699999999], [34.227528, -84.653744], [34.251121, -84.653233], [34.346934, -84.653998], [34.34683, -84.644684], [34.355168, -84.64429299999999], [34.355176, -84.654038], [34.41259, -84.653232], [34.412191, -84.58283], [34.381492, -84.58263], [34.380392, -84.442326], [34.388192, -84.442126], [34.387994, -84.424523], [34.380593, -84.424526], [34.380492, -84.400724], [34.373266, -84.400774], [34.373292, -84.392366], [34.38005, -84.392112], [34.380699, -84.39082599999999], [34.380992, -84.25758599999999], [34.185908999999995, -84.258743], [34.186144, -84.32826299999999], [34.178982, -84.33706699999999], [34.176099, -84.343316], [34.176778999999996, -84.352249], [34.162319, -84.36053299999999], [34.154682, -84.356825], [34.152969, -84.35983999999999], [34.14868, -84.358879], [34.143701, -84.360001], [34.141362, -84.358852], [34.137024, -84.36133199999999], [34.131634, -84.35972799999999], [34.124212, -84.36177099999999], [34.122318, -84.364947], [34.122567, -84.369552], [34.118763, -84.379295], [34.119585, -84.38794999999999], [34.118238999999996, -84.38832], [34.117663, -84.39164], [34.11461, -84.39353799999999], [34.115214, -84.395009], [34.109666, -84.399541], [34.110099, -84.404033], [34.107974999999996, -84.41145], [34.110346, -84.414914], [34.109043, -84.41842799999999], [34.073298, -84.418927], [34.075198, -84.511831], [34.078598, -84.511831], [34.078697999999996, -84.51543099999999], [34.075298, -84.515531], [34.077216, -84.613546], [34.081136, -84.613663], [34.081433, -84.623486]]]};
 const ZONE_SOURCES={
-  gwinnett:{label:"Gwinnett",urls:[
-    "https://gis3.gwinnettcounty.com/mapvis/rest/services/GISDataBrowser/GC_Main/MapServer/26/query"
-  ],hsField:"HIGH",level:null},
-  forsyth:{label:"Forsyth",urls:[
-    "https://fcsmaps.forsyth.k12.ga.us/arcgis/rest/services/SchoolLocatorRolta1071v8/MapServer/6/query",
-    "https://fcsmaps.forsyth.k12.ga.us/arcgis/rest/services/SchoolLocatorRolta1071v7_21/MapServer/6/query"
-  ],hsField:"HS_NAME",level:null},
-  dekalb:{label:"DeKalb",urls:[
-    "https://services3.arcgis.com/3TzhpgpIaE4cOUGc/ArcGIS/rest/services/High_School_Attendance_Areas/FeatureServer/0/query"
-  ],hsField:"HS_Name",level:null},
-  fulton:{label:"Fulton",urls:[
-    "https://services8.arcgis.com/Z9FqikR5EvSdSJv0/arcgis/rest/services/School_Attendance_Areas/FeatureServer/0/query",
-    "https://services.arcgis.com/EeYBJFxLdUojipYa/ArcGIS/rest/services/School_Attendance_Areas/FeatureServer/0/query"
-  ],hsField:null,level:"High"}
+  gwinnett:{label:"Gwinnett",urls:["https://gis3.gwinnettcounty.com/mapvis/rest/services/GISDataBrowser/GC_Main/MapServer/26/query"],hsField:"HIGH",level:null},
+  forsyth:{label:"Forsyth",urls:["https://fcsmaps.forsyth.k12.ga.us/arcgis/rest/services/SchoolLocatorRolta1071v8/MapServer/6/query","https://fcsmaps.forsyth.k12.ga.us/arcgis/rest/services/SchoolLocatorRolta1071v7_21/MapServer/6/query"],hsField:"HS_NAME",level:null},
+  dekalb:{label:"DeKalb",urls:["https://services3.arcgis.com/3TzhpgpIaE4cOUGc/ArcGIS/rest/services/High_School_Attendance_Areas/FeatureServer/0/query"],hsField:"HS_Name",level:null},
+  fulton:{label:"Fulton",urls:["https://services8.arcgis.com/Z9FqikR5EvSdSJv0/arcgis/rest/services/School_Attendance_Areas/FeatureServer/0/query","https://services.arcgis.com/EeYBJFxLdUojipYa/ArcGIS/rest/services/School_Attendance_Areas/FeatureServer/0/query"],hsField:null,level:"High"}
 };
-
 let map,markers={},outlineLayer,zoneLayer=null;
 const state={search:"",district:"all",tier:"all"};
 const sortedSchools=[...SCHOOLS].sort((a,b)=>a.name.localeCompare(b.name));
-
 function buildBaseLayers(){
   const osm=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'});
   const carto=L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{maxZoom:20,subdomains:'abcd',attribution:'© OSM © Carto'});
@@ -321,32 +294,28 @@ function maybeFallback(name){
   else if(tileErr>=6&&tileOk===0){showTile('⚠️ Online basemaps appear blocked (corporate firewall). Markers, zones & data still work; try from home for imagery.',true);}
 }
 function showTile(msg,sticky){const el=document.getElementById('tile-status');el.innerHTML='<b>Basemap status</b><br>'+msg;el.style.display='block';if(!sticky){clearTimeout(el._t);el._t=setTimeout(()=>el.style.display='none',4000);}}
-
+// Handle both single-polygon (array of rings) and multipolygon (array of polygons) latlng structures.
+function addCountyOutline(name,geom,color){
+  const isMulti=Array.isArray(geom)&&Array.isArray(geom[0])&&Array.isArray(geom[0][0])&&Array.isArray(geom[0][0][0]);
+  const latlngs=isMulti?geom:geom; // L.polygon accepts [ring,...] or [[ring,...],...]
+  L.polygon(latlngs,{color:color,weight:2,opacity:.65,fill:false,className:'county-outline'}).addTo(outlineLayer).bindTooltip(name,{sticky:true});
+}
 function initMap(){
   map=L.map('map',{scrollWheelZoom:true}).setView([33.98,-84.20],11);
   const b=buildBaseLayers();
   provList=[{label:'Streets (Carto)',layer:b.carto},{label:'Streets (OSM)',layer:b.osm},{label:'Streets (Esri)',layer:b.esriStreet}];
   activeBase=provList[0].layer;activeBase.addTo(map);watchTiles(activeBase,provList[0].label);
   L.control.layers({"🗺️ Streets":activeBase,"🛰️ Satellite":b.esriSat},null,{position:'topright',collapsed:true}).addTo(map);
-
   outlineLayer=L.layerGroup();
-  Object.entries(DISTRICT_POLYGONS).forEach(([name,pts])=>{
-    const color=DISTRICT_COLORS[name]||'#666';
-    L.polygon(pts,{color:color,weight:2.5,fillColor:color,fillOpacity:0.05,dashArray:'4,3'}).addTo(outlineLayer).bindTooltip(name,{sticky:true});
-  });
+  Object.entries(DISTRICT_POLYGONS).forEach(([name,geom])=>addCountyOutline(name,geom,DISTRICT_COLORS[name]||'#666'));
   outlineLayer.addTo(map);
-
   map.createPane('isoPane');map.getPane('isoPane').style.zIndex=350;map.getPane('isoPane').style.pointerEvents='none';
-
   const oi=L.divIcon({className:'',html:'<div style="background:#111827;width:16px;height:16px;border-radius:50%;border:3px solid white;box-shadow:0 0 0 2px #111827;"></div>',iconSize:[16,16],iconAnchor:[8,8]});
   L.marker(ORIGIN,{icon:oi}).addTo(map).bindPopup("<b>📍 Peachtree Corners, GA</b><br>Commute origin point");
   renderMarkers();
 }
-
 function makeIcon(color,tier){
-  const shape=tier==='magnet'
-    ?'<div style="width:16px;height:16px;background:'+color+';transform:rotate(45deg);border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,.5);"></div>'
-    :'<div style="width:16px;height:16px;background:'+color+';border-radius:50%;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,.5);"></div>';
+  const shape=tier==='magnet'?'<div style="width:16px;height:16px;background:'+color+';transform:rotate(45deg);border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,.5);"></div>':'<div style="width:16px;height:16px;background:'+color+';border-radius:50%;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,.5);"></div>';
   return L.divIcon({className:'',html:shape,iconSize:[16,16],iconAnchor:[8,8]});
 }
 function zillowLink(s){return 'https://www.zillow.com/homes/'+encodeURIComponent(s.name+' '+s.city+' GA')+'_rb/';}
@@ -362,412 +331,93 @@ function popupHtml(s){
 }
 function renderMarkers(){
   Object.values(markers).forEach(m=>map.removeLayer(m));markers={};
-  sortedSchools.forEach((s,idx)=>{
-    const m=L.marker([s.lat,s.lon],{icon:makeIcon(districtColor(s.district),s.tier)});
-    m.bindPopup(popupHtml(s));m.on('click',()=>selectCardBase(idx,false));m.addTo(map);markers[idx]=m;
-  });
+  sortedSchools.forEach((s,idx)=>{const m=L.marker([s.lat,s.lon],{icon:makeIcon(districtColor(s.district),s.tier)});m.bindPopup(popupHtml(s));m.on('click',()=>selectCardBase(idx,false));m.addTo(map);markers[idx]=m;});
 }
-
 function hashColor(str){let h=0;for(let i=0;i<str.length;i++){h=str.charCodeAt(i)+((h<<5)-h);}return 'hsl('+(Math.abs(h)%360)+',65%,55%)';}
 const HS_FIELDS=["HIGH","HIGH_SCHO","HIGH_SCHOOL","HS","HS_NAME","HSNAME","HS_Name","HIGHSCHOOL","HighSchool","high","SCH_NAME","SCHOOLNAME","SchoolName","SCHOOL","NAME","schnam","hs_zone","ClusterNam"];
-function detectHSField(props){
-  const keys=Object.keys(props||{});
-  for(const c of HS_FIELDS){const hit=keys.find(k=>k.toLowerCase()===c.toLowerCase());if(hit)return hit;}
-  const guess=keys.find(k=>/high|hs|school|cluster/i.test(k));
-  return guess||keys[0]||null;
-}
-function detectLevelField(props){
-  const keys=Object.keys(props||{});
-  return keys.find(k=>/^(level|type|grade|schtype|sch_type|schlevel|gradespan)$/i.test(k))
-      || keys.find(k=>/level|grade|type/i.test(k)) || null;
-}
-function esriToGeoJSON(data){
-  if(data&&data.type==='FeatureCollection')return data;
-  if(data&&Array.isArray(data.features)&&data.features[0]&&data.features[0].geometry&&data.features[0].geometry.rings){
-    return {type:'FeatureCollection',features:data.features.map(f=>({type:'Feature',properties:f.attributes||{},geometry:{type:'Polygon',coordinates:f.geometry.rings}}))};
-  }
-  return data;
-}
+function detectHSField(props){const keys=Object.keys(props||{});for(const c of HS_FIELDS){const hit=keys.find(k=>k.toLowerCase()===c.toLowerCase());if(hit)return hit;}const guess=keys.find(k=>/high|hs|school|cluster/i.test(k));return guess||keys[0]||null;}
+function detectLevelField(props){const keys=Object.keys(props||{});return keys.find(k=>/^(level|type|grade|schtype|sch_type|schlevel|gradespan)$/i.test(k))||keys.find(k=>/level|grade|type/i.test(k))||null;}
+function esriToGeoJSON(data){if(data&&data.type==='FeatureCollection')return data;if(data&&Array.isArray(data.features)&&data.features[0]&&data.features[0].geometry&&data.features[0].geometry.rings){return {type:'FeatureCollection',features:data.features.map(f=>({type:'Feature',properties:f.attributes||{},geometry:{type:'Polygon',coordinates:f.geometry.rings}}))};}return data;}
 let currentZoneFC=null;
-
 function setZoneStatus(cls,html){const el=document.getElementById('zone-status');el.className=cls||'';el.innerHTML=html;el.style.display=cls?'block':'none';}
-function renderDiag(rows){
-  const el=document.getElementById('zone-diag');
-  if(!rows||!rows.length){el.style.display='none';return;}
-  el.innerHTML=rows.map(r=>'<div class="zd-row '+r.cls+'"><span>'+r.label+'</span><span>'+r.note+'</span></div>').join('');
-  el.style.display='block';
-}
-function clearZones(){
-  if(zoneLayer){map.removeLayer(zoneLayer);zoneLayer=null;}
-  currentZoneFC=null;
-  const lz=document.getElementById('legend-zones');if(lz)lz.innerHTML='';
-  if(!map.hasLayer(outlineLayer))outlineLayer.addTo(map);
-  document.getElementById('btn-clear-zones').style.display='none';
-  setZoneStatus('','');renderDiag([]);
-}
-
-function filterHigh(feats,levelHint){
-  if(!levelHint||!feats.length)return feats;
-  const lf=detectLevelField(feats[0].properties||{});
-  if(!lf)return feats;
-  const want=String(levelHint).toLowerCase();
-  const out=feats.filter(f=>{
-    const v=String((f.properties||{})[lf]||'').toLowerCase();
-    return v.includes(want)||v==='hs'||v==='h'||v.includes('high');
-  });
-  return out.length?out:feats;
-}
-function normalize(feats,cfg){
-  feats=filterHigh(feats,cfg.level);
-  const hsField=cfg.hsField||detectHSField((feats[0]||{}).properties||{});
-  feats.forEach(f=>{const p=f.properties||(f.properties={});p.__HS__=(hsField&&p[hsField]!=null)?String(p[hsField]):'(unknown)';p.__COUNTY__=cfg.label;});
-  return feats;
-}
-
-async function fetchPaged(baseUrl){
-  const all=[];let offset=0;const page=1000;
-  for(let guard=0;guard<40;guard++){
-    const sep=baseUrl.includes('?')?'&':'?';
-    const url=baseUrl+sep+'where=1%3D1&outFields=*&outSR=4326&f=geojson&resultOffset='+offset+'&resultRecordCount='+page;
-    const resp=await fetch(url,{mode:'cors'});
-    if(!resp.ok)throw new Error('HTTP '+resp.status);
-    const raw=await resp.json();
-    const gj=esriToGeoJSON(raw);
-    const feats=(gj&&gj.features)||[];
-    all.push(...feats);
-    const more=raw.exceededTransferLimit||raw.properties&&raw.properties.exceededTransferLimit;
-    if(!more||feats.length===0)break;
-    offset+=feats.length;
-  }
-  if(!all.length)throw new Error('no features');
-  return all;
-}
-async function fetchSource(key){
-  const cfg=ZONE_SOURCES[key];let lastErr;
-  for(const u of cfg.urls){
-    try{const feats=await fetchPaged(u);return normalize(feats,cfg);}catch(e){lastErr=e;}
-  }
-  throw lastErr||new Error('all endpoints failed');
-}
-
+function renderDiag(rows){const el=document.getElementById('zone-diag');if(!rows||!rows.length){el.style.display='none';return;}el.innerHTML=rows.map(r=>'<div class="zd-row '+r.cls+'"><span>'+r.label+'</span><span>'+r.note+'</span></div>').join('');el.style.display='block';}
+function clearZones(){if(zoneLayer){map.removeLayer(zoneLayer);zoneLayer=null;}currentZoneFC=null;const lz=document.getElementById('legend-zones');if(lz)lz.innerHTML='';if(!map.hasLayer(outlineLayer))outlineLayer.addTo(map);document.getElementById('btn-clear-zones').style.display='none';setZoneStatus('','');renderDiag([]);}
+function filterHigh(feats,levelHint){if(!levelHint||!feats.length)return feats;const lf=detectLevelField(feats[0].properties||{});if(!lf)return feats;const want=String(levelHint).toLowerCase();const out=feats.filter(f=>{const v=String((f.properties||{})[lf]||'').toLowerCase();return v.includes(want)||v==='hs'||v==='h'||v.includes('high');});return out.length?out:feats;}
+function normalize(feats,cfg){feats=filterHigh(feats,cfg.level);const hsField=cfg.hsField||detectHSField((feats[0]||{}).properties||{});feats.forEach(f=>{const p=f.properties||(f.properties={});p.__HS__=(hsField&&p[hsField]!=null)?String(p[hsField]):'(unknown)';p.__COUNTY__=cfg.label;});return feats;}
+async function fetchPaged(baseUrl){const all=[];let offset=0;const page=1000;for(let guard=0;guard<40;guard++){const sep=baseUrl.includes('?')?'&':'?';const url=baseUrl+sep+'where=1%3D1&outFields=*&outSR=4326&f=geojson&resultOffset='+offset+'&resultRecordCount='+page;const resp=await fetch(url,{mode:'cors'});if(!resp.ok)throw new Error('HTTP '+resp.status);const raw=await resp.json();const gj=esriToGeoJSON(raw);const feats=(gj&&gj.features)||[];all.push(...feats);const more=raw.exceededTransferLimit||raw.properties&&raw.properties.exceededTransferLimit;if(!more||feats.length===0)break;offset+=feats.length;}if(!all.length)throw new Error('no features');return all;}
+async function fetchSource(key){const cfg=ZONE_SOURCES[key];let lastErr;for(const u of cfg.urls){try{const feats=await fetchPaged(u);return normalize(feats,cfg);}catch(e){lastErr=e;}}throw lastErr||new Error('all endpoints failed');}
 function renderZones(fc){
   if(zoneLayer){map.removeLayer(zoneLayer);zoneLayer=null;}
-  const feats=fc.features||[];
-  if(!feats.length){setZoneStatus('err','No high-school zone polygons found.');return;}
-  currentZoneFC=fc;
-  const seen={};
-  zoneLayer=L.geoJSON(fc,{
-    style:f=>{const v=(f.properties&&f.properties.__HS__)||'(unknown)';const col=hashColor(v);seen[v]={color:col,county:(f.properties&&f.properties.__COUNTY__)||''};return {color:col,weight:1.2,fillColor:col,fillOpacity:0.38};},
-    onEachFeature:(f,layer)=>{
-      const p=f.properties||{};const hs=p.__HS__||'(unknown)';
-      const county=p.__COUNTY__?' <span class="popup-badge">'+p.__COUNTY__+' Co.</span>':'';
-      layer.bindPopup('<div class="zone-popup"><h3>Zoned high school'+county+'</h3><div class="row hs">'+hs+'</div>'
-        +'<div class="popup-links" style="margin-top:6px;">🏡 <a href="https://www.zillow.com/homes/'+encodeURIComponent(hs+' High School GA')+'_rb/" target="_blank" rel="noopener">Homes in this zone on Zillow ↗</a></div></div>');
-      layer.on('mouseover',()=>layer.setStyle({weight:3,fillOpacity:0.55}));
-      layer.on('mouseout',()=>zoneLayer.resetStyle(layer));
-      layer.bindTooltip(String(hs),{sticky:true});
-    }
+  const feats=fc.features||[];if(!feats.length){setZoneStatus('err','No high-school zone polygons found.');return;}
+  currentZoneFC=fc;const seen={};
+  zoneLayer=L.geoJSON(fc,{style:f=>{const v=(f.properties&&f.properties.__HS__)||'(unknown)';const col=hashColor(v);seen[v]={color:col,county:(f.properties&&f.properties.__COUNTY__)||''};return {color:col,weight:1.2,fillColor:col,fillOpacity:0.38};},
+    onEachFeature:(f,layer)=>{const p=f.properties||{};const hs=p.__HS__||'(unknown)';const county=p.__COUNTY__?' <span class="popup-badge">'+p.__COUNTY__+' Co.</span>':'';layer.bindPopup('<div class="zone-popup"><h3>Zoned high school'+county+'</h3><div class="row hs">'+hs+'</div><div class="popup-links" style="margin-top:6px;">🏡 <a href="https://www.zillow.com/homes/'+encodeURIComponent(hs+' High School GA')+'_rb/" target="_blank" rel="noopener">Homes in this zone on Zillow ↗</a></div></div>');layer.on('mouseover',()=>layer.setStyle({weight:3,fillOpacity:0.55}));layer.on('mouseout',()=>zoneLayer.resetStyle(layer));layer.bindTooltip(String(hs),{sticky:true});}
   }).addTo(map);
   if(map.hasLayer(outlineLayer))map.removeLayer(outlineLayer);
-
-  const byCounty={};
-  Object.entries(seen).forEach(([n,info])=>{(byCounty[info.county]=byCounty[info.county]||[]).push([n,info.color]);});
-  let lz='<b>High-school zones</b>';
-  Object.keys(byCounty).sort().forEach(cty=>{
-    lz+='<div style="margin-top:5px;font-weight:700;color:#374151;">'+(cty||'—')+'</div>';
-    lz+=byCounty[cty].sort((a,b)=>a[0].localeCompare(b[0])).map(([n,c])=>'<div><span class="legend-swatch" style="background:'+c+'"></span>'+n+'</div>').join('');
-  });
-  const lzEl=document.getElementById('legend-zones');if(lzEl)lzEl.innerHTML=lz;
-  document.getElementById('btn-clear-zones').style.display='block';
+  const byCounty={};Object.entries(seen).forEach(([n,info])=>{(byCounty[info.county]=byCounty[info.county]||[]).push([n,info.color]);});
+  let lz='<b>High-school zones</b>';Object.keys(byCounty).sort().forEach(cty=>{lz+='<div style="margin-top:5px;font-weight:700;color:#374151;">'+(cty||'—')+'</div>';lz+=byCounty[cty].sort((a,b)=>a[0].localeCompare(b[0])).map(([n,c])=>'<div><span class="legend-swatch" style="background:'+c+'"></span>'+n+'</div>').join('');});
+  const lzEl=document.getElementById('legend-zones');if(lzEl)lzEl.innerHTML=lz;document.getElementById('btn-clear-zones').style.display='block';
 }
-
 async function loadCounties(keys,btnEl,btnLabel){
-  if(btnEl){btnEl.disabled=true;btnEl.textContent='⏳ Loading…';}
-  setZoneStatus('warn','Contacting county GIS services…');
-  const merged=(currentZoneFC?currentZoneFC.features.slice():[]);
-  const reloading=new Set(keys.map(k=>ZONE_SOURCES[k].label));
-  const base=merged.filter(f=>!reloading.has(f.properties&&f.properties.__COUNTY__));
-  const diag=[];
-  const results=await Promise.all(keys.map(async k=>{
-    try{const feats=await fetchSource(k);return {k,feats};}catch(e){return {k,err:e};}
-  }));
-  const add=[];
-  results.forEach(r=>{
-    const lab=ZONE_SOURCES[r.k].label;
-    if(r.feats&&r.feats.length){add.push(...r.feats);diag.push({cls:'zd-ok',label:lab,note:r.feats.length+' zones ✓'});}
-    else {diag.push({cls:'zd-fail',label:lab,note:'blocked — use file'});}
-  });
-  ['Cobb','Cherokee'].forEach(c=>{ if(base.some(f=>f.properties.__COUNTY__===c)) diag.push({cls:'zd-file',label:c,note:'from file ✓'}); });
-
+  if(btnEl){btnEl.disabled=true;btnEl.textContent='⏳ Loading…';}setZoneStatus('warn','Contacting county GIS services…');
+  const merged=(currentZoneFC?currentZoneFC.features.slice():[]);const reloading=new Set(keys.map(k=>ZONE_SOURCES[k].label));const base=merged.filter(f=>!reloading.has(f.properties&&f.properties.__COUNTY__));const diag=[];
+  const results=await Promise.all(keys.map(async k=>{try{const feats=await fetchSource(k);return {k,feats};}catch(e){return {k,err:e};}}));
+  const add=[];results.forEach(r=>{const lab=ZONE_SOURCES[r.k].label;if(r.feats&&r.feats.length){add.push(...r.feats);diag.push({cls:'zd-ok',label:lab,note:r.feats.length+' zones ✓'});}else {diag.push({cls:'zd-fail',label:lab,note:'blocked — use file'});}});
+  ['Cobb','Cherokee'].forEach(c=>{if(base.some(f=>f.properties.__COUNTY__===c))diag.push({cls:'zd-file',label:c,note:'from file ✓'});});
   if(btnEl){btnEl.disabled=false;btnEl.textContent=btnLabel;}
   const finalFeats=base.concat(add);
-  if(finalFeats.length){
-    renderZones({type:'FeatureCollection',features:finalFeats});
-    const okc=diag.filter(d=>d.cls==='zd-ok').length;
-    const failc=diag.filter(d=>d.cls==='zd-fail').length;
-    if(failc){setZoneStatus('warn','Loaded '+okc+' live source(s). '+failc+' blocked on this network — use the 📁 file loader (links below) for those.');}
-    else{setZoneStatus('ok','✅ Loaded live zones. Colored by feeder high school.');}
-    renderDiag(diag);
-  }else{
-    setZoneStatus('err','Couldn\u2019t reach any county GIS live (likely a firewall/CORS block). On a home network this usually works — otherwise use "📁 Load GeoJSON file(s)" with the official downloads below. That always works, even offline.');
-    renderDiag(diag);
-  }
+  if(finalFeats.length){renderZones({type:'FeatureCollection',features:finalFeats});const okc=diag.filter(d=>d.cls==='zd-ok').length;const failc=diag.filter(d=>d.cls==='zd-fail').length;if(failc){setZoneStatus('warn','Loaded '+okc+' live source(s). '+failc+' blocked on this network — use the 📁 file loader (links below) for those.');}else{setZoneStatus('ok','✅ Loaded live zones. Colored by feeder high school.');}renderDiag(diag);}
+  else{setZoneStatus('err','Couldn\u2019t reach any county GIS live (likely a firewall/CORS block). On a home network this usually works — otherwise use "📁 Load GeoJSON file(s)" with the official downloads below. That always works, even offline.');renderDiag(diag);}
 }
-
 function loadLocalFiles(evt){
-  const files=[...(evt.target.files||[])];if(!files.length)return;
-  setZoneStatus('warn','Reading '+files.length+' file(s)…');
-  let pending=files.length;const collected=[];const diag=[];
-  files.forEach(file=>{
-    const reader=new FileReader();
-    reader.onload=()=>{
-      try{
-        const gj=esriToGeoJSON(JSON.parse(reader.result));
-        let fc=gj.type==='FeatureCollection'?gj:(gj.type==='Feature'?{type:'FeatureCollection',features:[gj]}:null);
-        if(!fc||!fc.features)throw new Error('not GeoJSON');
-        const label=file.name.replace(/\.(geo)?json$/i,'')||'File';
-        let feats=filterHigh(fc.features,'High');
-        const hsField=detectHSField((feats[0]||{}).properties||{});
-        feats.forEach(f=>{const p=f.properties||(f.properties={});p.__HS__=(hsField&&p[hsField]!=null)?String(p[hsField]):'(unknown)';p.__COUNTY__=label;});
-        collected.push(...feats);
-        diag.push({cls:'zd-file',label:label,note:feats.length+' zones ✓'});
-      }catch(e){diag.push({cls:'zd-fail',label:file.name,note:'parse error'});}
-      if(--pending===0)finishFiles(collected,diag);
-    };
-    reader.onerror=()=>{diag.push({cls:'zd-fail',label:file.name,note:'read error'});if(--pending===0)finishFiles(collected,diag);};
-    reader.readAsText(file);
-  });
+  const files=[...(evt.target.files||[])];if(!files.length)return;setZoneStatus('warn','Reading '+files.length+' file(s)…');let pending=files.length;const collected=[];const diag=[];
+  files.forEach(file=>{const reader=new FileReader();reader.onload=()=>{try{const gj=esriToGeoJSON(JSON.parse(reader.result));let fc=gj.type==='FeatureCollection'?gj:(gj.type==='Feature'?{type:'FeatureCollection',features:[gj]}:null);if(!fc||!fc.features)throw new Error('not GeoJSON');const label=file.name.replace(/\.(geo)?json$/i,'')||'File';let feats=filterHigh(fc.features,'High');const hsField=detectHSField((feats[0]||{}).properties||{});feats.forEach(f=>{const p=f.properties||(f.properties={});p.__HS__=(hsField&&p[hsField]!=null)?String(p[hsField]):'(unknown)';p.__COUNTY__=label;});collected.push(...feats);diag.push({cls:'zd-file',label:label,note:feats.length+' zones ✓'});}catch(e){diag.push({cls:'zd-fail',label:file.name,note:'parse error'});}if(--pending===0)finishFiles(collected,diag);};reader.onerror=()=>{diag.push({cls:'zd-fail',label:file.name,note:'read error'});if(--pending===0)finishFiles(collected,diag);};reader.readAsText(file);});
 }
-function finishFiles(collected,diag){
-  const base=currentZoneFC?currentZoneFC.features.slice():[];
-  const merged=base.concat(collected);
-  if(merged.length){renderZones({type:'FeatureCollection',features:merged});setZoneStatus('ok','✅ Added '+collected.length+' zones from file(s).');renderDiag(diag);}
-  else{setZoneStatus('err','No usable polygons found in those files.');renderDiag(diag);}
-}
-
+function finishFiles(collected,diag){const base=currentZoneFC?currentZoneFC.features.slice():[];const merged=base.concat(collected);if(merged.length){renderZones({type:'FeatureCollection',features:merged});setZoneStatus('ok','✅ Added '+collected.length+' zones from file(s).');renderDiag(diag);}else{setZoneStatus('err','No usable polygons found in those files.');renderDiag(diag);}}
 let addrMarker=null,addrLine=null;
 function pointInRing(lon,lat,ring){let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1];const hit=((yi>lat)!==(yj>lat))&&(lon<(xj-xi)*(lat-yi)/((yj-yi)||1e-12)+xi);if(hit)inside=!inside;}return inside;}
-function pointInFeature(lon,lat,geom){
-  if(!geom)return false;
-  if(geom.type==='Polygon'){const r=geom.coordinates;if(!r.length||!pointInRing(lon,lat,r[0]))return false;for(let k=1;k<r.length;k++)if(pointInRing(lon,lat,r[k]))return false;return true;}
-  if(geom.type==='MultiPolygon'){for(const poly of geom.coordinates){if(!poly.length)continue;if(pointInRing(lon,lat,poly[0])){let hole=false;for(let k=1;k<poly.length;k++)if(pointInRing(lon,lat,poly[k])){hole=true;break;}if(!hole)return true;}}}
-  return false;
-}
+function pointInFeature(lon,lat,geom){if(!geom)return false;if(geom.type==='Polygon'){const r=geom.coordinates;if(!r.length||!pointInRing(lon,lat,r[0]))return false;for(let k=1;k<r.length;k++)if(pointInRing(lon,lat,r[k]))return false;return true;}if(geom.type==='MultiPolygon'){for(const poly of geom.coordinates){if(!poly.length)continue;if(pointInRing(lon,lat,poly[0])){let hole=false;for(let k=1;k<poly.length;k++)if(pointInRing(lon,lat,poly[k])){hole=true;break;}if(!hole)return true;}}}return false;}
 function findZoneAt(lon,lat){if(!currentZoneFC)return null;for(const f of currentZoneFC.features){if(pointInFeature(lon,lat,f.geometry))return {hs:(f.properties&&f.properties.__HS__)||'(unknown)',county:(f.properties&&f.properties.__COUNTY__)||''};}return null;}
 function haversineMi(a,b,c,d){const R=3958.8,r=x=>x*Math.PI/180;const dLat=r(c-a),dLon=r(d-b);const x=Math.sin(dLat/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
-async function geocode(q){
-  const url='https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=us&q='+encodeURIComponent(q);
-  const resp=await fetch(url,{headers:{'Accept':'application/json'}});
-  if(!resp.ok)throw new Error('geocode HTTP '+resp.status);
-  const arr=await resp.json();if(!arr.length)throw new Error('Address not found');
-  return {lat:parseFloat(arr[0].lat),lon:parseFloat(arr[0].lon),label:arr[0].display_name};
-}
-async function drivingCommute(lat,lon){
-  const url='https://router.project-osrm.org/route/v1/driving/'+lon+','+lat+';'+ORIGIN[1]+','+ORIGIN[0]+'?overview=false';
-  const resp=await fetch(url);if(!resp.ok)throw new Error('route HTTP '+resp.status);
-  const j=await resp.json();if(!j.routes||!j.routes.length)throw new Error('no route');
-  return {min:Math.round(j.routes[0].duration/60),mi:j.routes[0].distance/1609.34};
-}
+async function geocode(q){const url='https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=us&q='+encodeURIComponent(q);const resp=await fetch(url,{headers:{'Accept':'application/json'}});if(!resp.ok)throw new Error('geocode HTTP '+resp.status);const arr=await resp.json();if(!arr.length)throw new Error('Address not found');return {lat:parseFloat(arr[0].lat),lon:parseFloat(arr[0].lon),label:arr[0].display_name};}
+async function drivingCommute(lat,lon){const url='https://router.project-osrm.org/route/v1/driving/'+lon+','+lat+';'+ORIGIN[1]+','+ORIGIN[0]+'?overview=false';const resp=await fetch(url);if(!resp.ok)throw new Error('route HTTP '+resp.status);const j=await resp.json();if(!j.routes||!j.routes.length)throw new Error('no route');return {min:Math.round(j.routes[0].duration/60),mi:j.routes[0].distance/1609.34};}
 function setAddrStatus(cls,html){const el=document.getElementById('addr-status');el.className=cls||'';el.innerHTML=html;el.style.display=cls?'block':'none';}
 async function checkAddress(){
-  const q=document.getElementById('addr-input').value.trim();
-  if(!q){setAddrStatus('warn','Type an address first.');return;}
-  const btn=document.getElementById('addr-go');btn.disabled=true;btn.textContent='…';
-  document.getElementById('addr-result').style.display='none';setAddrStatus('warn','Looking up address…');
-  try{
-    const g=await geocode(q);
-    if(addrMarker)map.removeLayer(addrMarker);
-    const pin=L.divIcon({className:'',html:'<div style="font-size:26px;line-height:26px;">📍</div>',iconSize:[26,26],iconAnchor:[13,26]});
-    addrMarker=L.marker([g.lat,g.lon],{icon:pin,zIndexOffset:1000}).addTo(map);
-    if(MOBILE_MQ.matches)setView('map');
-    map.flyTo([g.lat,g.lon],13,{duration:0.6});
-    const zone=findZoneAt(g.lon,g.lat);
-    setAddrStatus('warn','Calculating driving commute…');
-    let commuteStr,commuteMi;
-    try{const c=await drivingCommute(g.lat,g.lon);commuteStr=c.min+' min drive';commuteMi=c.mi;}
-    catch(e){const mi=haversineMi(g.lat,g.lon,ORIGIN[0],ORIGIN[1]);commuteMi=mi;commuteStr='~'+Math.max(5,Math.round(mi*1.8))+' min (est.)';}
-    if(addrLine)map.removeLayer(addrLine);
-    addrLine=L.polyline([[g.lat,g.lon],ORIGIN],{color:'#059669',weight:2,dashArray:'5,6',opacity:.8}).addTo(map);
-    const zoneHtml=zone
-      ?'<div>🏫 Zoned high school: <span class="ar-hs">'+zone.hs+'</span>'+(zone.county?' <span style="color:#6b7280">('+zone.county+' Co.)</span>':'')+'</div>'
-      :(currentZoneFC
-          ?'<div style="color:#92400e">🏫 Not inside any loaded zone — it may be in a county you haven\u2019t loaded yet (try "Load ALL live zones", or load the Cobb/Cherokee file).</div>'
-          :'<div style="color:#92400e">🏫 No zones loaded yet — open 🗺️ and load zones, then re-check.</div>');
-    const zillow='https://www.zillow.com/homes/'+encodeURIComponent(q)+'_rb/';
-    const gmaps='https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(q)+'&destination=Peachtree+Corners,+GA';
-    document.getElementById('addr-result').innerHTML='<div class="arh">📍 '+g.label+'</div><div class="arb">'+zoneHtml
-      +'<div style="margin-top:3px;">🚗 Commute to Peachtree Corners: <span class="ar-commute">'+commuteStr+'</span>'+(commuteMi?' · '+commuteMi.toFixed(1)+' mi':'')+'</div>'
-      +'<div class="ar-links"><a href="'+gmaps+'" target="_blank" rel="noopener">Directions ↗</a><a href="'+zillow+'" target="_blank" rel="noopener">Zillow ↗</a></div></div>';
-    document.getElementById('addr-result').style.display='block';setAddrStatus('','');
-    addrMarker.bindPopup('<b>'+g.label+'</b><br>'+(zone?'🏫 <b>'+zone.hs+'</b>'+(zone.county?' ('+zone.county+' Co.)':''):'🏫 No loaded zone here')+'<br>🚗 '+commuteStr).openPopup();
-  }catch(err){
-    setAddrStatus('err','Couldn\u2019t complete that lookup'+(err&&err.message?': '+err.message:'')+'. On a corporate network the geocoder/router may be blocked — try from home, or click a colored zone directly.');
-  }finally{btn.disabled=false;btn.textContent='Check';}
+  const q=document.getElementById('addr-input').value.trim();if(!q){setAddrStatus('warn','Type an address first.');return;}
+  const btn=document.getElementById('addr-go');btn.disabled=true;btn.textContent='…';document.getElementById('addr-result').style.display='none';setAddrStatus('warn','Looking up address…');
+  try{const g=await geocode(q);if(addrMarker)map.removeLayer(addrMarker);const pin=L.divIcon({className:'',html:'<div style="font-size:26px;line-height:26px;">📍</div>',iconSize:[26,26],iconAnchor:[13,26]});addrMarker=L.marker([g.lat,g.lon],{icon:pin,zIndexOffset:1000}).addTo(map);if(MOBILE_MQ.matches)setView('map');map.flyTo([g.lat,g.lon],13,{duration:0.6});
+    const zone=findZoneAt(g.lon,g.lat);setAddrStatus('warn','Calculating driving commute…');let commuteStr,commuteMi;
+    try{const c=await drivingCommute(g.lat,g.lon);commuteStr=c.min+' min drive';commuteMi=c.mi;}catch(e){const mi=haversineMi(g.lat,g.lon,ORIGIN[0],ORIGIN[1]);commuteMi=mi;commuteStr='~'+Math.max(5,Math.round(mi*1.8))+' min (est.)';}
+    if(addrLine)map.removeLayer(addrLine);addrLine=L.polyline([[g.lat,g.lon],ORIGIN],{color:'#059669',weight:2,dashArray:'5,6',opacity:.8}).addTo(map);
+    const zoneHtml=zone?'<div>🏫 Zoned high school: <span class="ar-hs">'+zone.hs+'</span>'+(zone.county?' <span style="color:#6b7280">('+zone.county+' Co.)</span>':'')+'</div>':(currentZoneFC?'<div style="color:#92400e">🏫 Not inside any loaded zone — it may be in a county you haven\u2019t loaded yet (try "Load ALL live zones", or load the Cobb/Cherokee file).</div>':'<div style="color:#92400e">🏫 No zones loaded yet — open 🗺️ and load zones, then re-check.</div>');
+    const zillow='https://www.zillow.com/homes/'+encodeURIComponent(q)+'_rb/';const gmaps='https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(q)+'&destination=Peachtree+Corners,+GA';
+    document.getElementById('addr-result').innerHTML='<div class="arh">📍 '+g.label+'</div><div class="arb">'+zoneHtml+'<div style="margin-top:3px;">🚗 Commute to Peachtree Corners: <span class="ar-commute">'+commuteStr+'</span>'+(commuteMi?' · '+commuteMi.toFixed(1)+' mi':'')+'</div><div class="ar-links"><a href="'+gmaps+'" target="_blank" rel="noopener">Directions ↗</a><a href="'+zillow+'" target="_blank" rel="noopener">Zillow ↗</a></div></div>';
+    document.getElementById('addr-result').style.display='block';setAddrStatus('','');addrMarker.bindPopup('<b>'+g.label+'</b><br>'+(zone?'🏫 <b>'+zone.hs+'</b>'+(zone.county?' ('+zone.county+' Co.)':''):'🏫 No loaded zone here')+'<br>🚗 '+commuteStr).openPopup();
+  }catch(err){setAddrStatus('err','Couldn\u2019t complete that lookup'+(err&&err.message?': '+err.message:'')+'. On a corporate network the geocoder/router may be blocked — try from home, or click a colored zone directly.');}finally{btn.disabled=false;btn.textContent='Check';}
 }
-
-function passesFilter(s){
-  const q=state.search.trim().toLowerCase();
-  const ms=!q||s.name.toLowerCase().includes(q)||s.city.toLowerCase().includes(q);
-  const md=state.district==='all'||districtGroup(s.district)===state.district;
-  const mt=state.tier==='all'||s.tier===state.tier;
-  return ms&&md&&mt;
-}
-function applyFilters(){
-  let shown=0;
-  sortedSchools.forEach((s,idx)=>{
-    const ok=passesFilter(s);
-    const card=document.getElementById('card-'+idx);if(card)card.style.display=ok?'':'none';
-    const m=markers[idx];if(m){if(ok){if(!map.hasLayer(m))m.addTo(map);}else{if(map.hasLayer(m))map.removeLayer(m);}}
-    if(ok)shown++;
-  });
-  document.getElementById('count').textContent=shown;
-}
-function selectCardBase(idx,openPopup){
-  document.querySelectorAll('.school-card').forEach(c=>c.classList.remove('selected'));
-  const card=document.getElementById('card-'+idx);if(card){card.classList.add('selected');card.scrollIntoView({behavior:'smooth',block:'nearest'});}
-  const s=sortedSchools[idx];map.flyTo([s.lat,s.lon],13,{duration:0.6});if(openPopup!==false)markers[idx].openPopup();
-}
-function renderList(){
-  document.getElementById('list').innerHTML=sortedSchools.map((s,idx)=>
-    '<div class="school-card" id="card-'+idx+'" onclick="selectCard('+idx+')"><h3>'+s.name+'</h3>'
-    +'<div class="meta">'+s.city+' · <span style="color:'+districtColor(s.district)+';font-weight:600;">'+districtGroup(s.district)+'</span></div>'
-    +'<div class="badge-row"><span class="badge">👥 '+s.enrollment.toLocaleString()+'</span><span class="badge '+nicheGradeClass(s.niche)+'">Niche '+s.niche+'</span>'+(s.usnews_state?'<span class="badge">GA #'+s.usnews_state+'</span>':'')+'<span class="badge">🚗 '+s.drive+'</span></div>'
-    +'<div class="meta" style="margin-top:4px;">'+s.specialty+'</div></div>').join('');
-}
-function renderDistrictChips(){
-  const districts=["Gwinnett County","Fulton County","Cobb County","Forsyth County","Cherokee County","DeKalb County","Buford City"];
-  const c=document.getElementById('district-chips');
-  c.innerHTML='<span class="chip active" data-district="all">All</span>'+districts.map(d=>'<span class="chip" data-district="'+d+'" style="border-color:'+DISTRICT_COLORS[d]+'">'+d.replace(' County','')+'</span>').join('');
-  c.querySelectorAll('.chip').forEach(chip=>{
-    chip.addEventListener('click',()=>{c.querySelectorAll('.chip').forEach(x=>{x.classList.remove('active');if(x.dataset.district!=='all')x.style.background='white';});chip.classList.add('active');
-      if(chip.dataset.district!=='all')chip.style.background=DISTRICT_COLORS[chip.dataset.district];
-      state.district=chip.dataset.district;applyFilters();});
-  });
-}
-function initControls(){
-  document.getElementById('search').addEventListener('input',e=>{state.search=e.target.value;applyFilters();});
-  document.querySelectorAll('[data-tier]').forEach(chip=>chip.addEventListener('click',()=>{document.querySelectorAll('[data-tier]').forEach(x=>x.classList.remove('active'));chip.classList.add('active');state.tier=chip.dataset.tier;applyFilters();}));
-  const btnAll=document.getElementById('btn-load-all');
-  btnAll.addEventListener('click',()=>loadCounties(['gwinnett','fulton','forsyth','dekalb'],btnAll,'⚡ Load ALL live zones'));
-  document.querySelectorAll('#county-load-chips .chip').forEach(chip=>chip.addEventListener('click',()=>loadCounties([chip.dataset.county],null,'')));
-  document.getElementById('geojson-file').addEventListener('change',loadLocalFiles);
-  document.getElementById('btn-clear-zones').addEventListener('click',clearZones);
-  document.getElementById('addr-go').addEventListener('click',checkAddress);
-  document.getElementById('addr-input').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();checkAddress();}});
-}
-
+function passesFilter(s){const q=state.search.trim().toLowerCase();const ms=!q||s.name.toLowerCase().includes(q)||s.city.toLowerCase().includes(q);const md=state.district==='all'||districtGroup(s.district)===state.district;const mt=state.tier==='all'||s.tier===state.tier;return ms&&md&&mt;}
+function applyFilters(){let shown=0;sortedSchools.forEach((s,idx)=>{const ok=passesFilter(s);const card=document.getElementById('card-'+idx);if(card)card.style.display=ok?'':'none';const m=markers[idx];if(m){if(ok){if(!map.hasLayer(m))m.addTo(map);}else{if(map.hasLayer(m))map.removeLayer(m);}}if(ok)shown++;});document.getElementById('count').textContent=shown;}
+function selectCardBase(idx,openPopup){document.querySelectorAll('.school-card').forEach(c=>c.classList.remove('selected'));const card=document.getElementById('card-'+idx);if(card){card.classList.add('selected');card.scrollIntoView({behavior:'smooth',block:'nearest'});}const s=sortedSchools[idx];map.flyTo([s.lat,s.lon],13,{duration:0.6});if(openPopup!==false)markers[idx].openPopup();}
+function renderList(){document.getElementById('list').innerHTML=sortedSchools.map((s,idx)=>'<div class="school-card" id="card-'+idx+'" onclick="selectCard('+idx+')"><h3>'+s.name+'</h3><div class="meta">'+s.city+' · <span style="color:'+districtColor(s.district)+';font-weight:600;">'+districtGroup(s.district)+'</span></div><div class="badge-row"><span class="badge">👥 '+s.enrollment.toLocaleString()+'</span><span class="badge '+nicheGradeClass(s.niche)+'">Niche '+s.niche+'</span>'+(s.usnews_state?'<span class="badge">GA #'+s.usnews_state+'</span>':'')+'<span class="badge">🚗 '+s.drive+'</span></div><div class="meta" style="margin-top:4px;">'+s.specialty+'</div></div>').join('');}
+function renderDistrictChips(){const districts=["Gwinnett County","Fulton County","Cobb County","Forsyth County","Cherokee County","DeKalb County","Buford City"];const c=document.getElementById('district-chips');c.innerHTML='<span class="chip active" data-district="all">All</span>'+districts.map(d=>'<span class="chip" data-district="'+d+'" style="border-color:'+DISTRICT_COLORS[d]+'">'+d.replace(' County','')+'</span>').join('');c.querySelectorAll('.chip').forEach(chip=>{chip.addEventListener('click',()=>{c.querySelectorAll('.chip').forEach(x=>{x.classList.remove('active');if(x.dataset.district!=='all')x.style.background='white';});chip.classList.add('active');if(chip.dataset.district!=='all')chip.style.background=DISTRICT_COLORS[chip.dataset.district];state.district=chip.dataset.district;applyFilters();});});}
+function initControls(){document.getElementById('search').addEventListener('input',e=>{state.search=e.target.value;applyFilters();});document.querySelectorAll('[data-tier]').forEach(chip=>chip.addEventListener('click',()=>{document.querySelectorAll('[data-tier]').forEach(x=>x.classList.remove('active'));chip.classList.add('active');state.tier=chip.dataset.tier;applyFilters();}));const btnAll=document.getElementById('btn-load-all');btnAll.addEventListener('click',()=>loadCounties(['gwinnett','fulton','forsyth','dekalb'],btnAll,'⚡ Load ALL live zones'));document.querySelectorAll('#county-load-chips .chip').forEach(chip=>chip.addEventListener('click',()=>loadCounties([chip.dataset.county],null,'')));document.getElementById('geojson-file').addEventListener('change',loadLocalFiles);document.getElementById('btn-clear-zones').addEventListener('click',clearZones);document.getElementById('addr-go').addEventListener('click',checkAddress);document.getElementById('addr-input').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();checkAddress();}});}
 const MOBILE_MQ=window.matchMedia('(max-width:768px)');
-function setView(view){
-  document.body.classList.remove('view-map','view-list');document.body.classList.add('view-'+view);
-  document.getElementById('btn-map').classList.toggle('active',view==='map');
-  document.getElementById('btn-list').classList.toggle('active',view==='list');
-  if(view==='map'&&map){setTimeout(()=>map.invalidateSize(),60);}
-}
+function setView(view){document.body.classList.remove('view-map','view-list');document.body.classList.add('view-'+view);document.getElementById('btn-map').classList.toggle('active',view==='map');document.getElementById('btn-list').classList.toggle('active',view==='list');if(view==='map'&&map){setTimeout(()=>map.invalidateSize(),60);}}
 function selectCard(idx){if(MOBILE_MQ.matches)setView('map');selectCardBase(idx,true);}
-function initMobile(){
-  if(MOBILE_MQ.matches)setView('map');
-  document.getElementById('btn-map').addEventListener('click',()=>setView('map'));
-  document.getElementById('btn-list').addEventListener('click',()=>setView('list'));
-  const controls=document.getElementById('controls');const ft=document.getElementById('filter-toggle');
-  if(MOBILE_MQ.matches)controls.classList.add('collapsed');
-  ft.addEventListener('click',()=>{controls.classList.toggle('collapsed');ft.textContent=controls.classList.contains('collapsed')?'▾ Show filters':'▴ Hide filters';});
-  MOBILE_MQ.addEventListener('change',e=>{if(e.matches){setView('map');controls.classList.add('collapsed');}else{document.body.classList.remove('view-map','view-list');}if(map)setTimeout(()=>map.invalidateSize(),60);});
-}
-
-function openDrawer(id){
-  document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));
-  const d=document.getElementById(id);if(!d)return;
-  d.classList.add('open');document.getElementById('drawer-backdrop').classList.add('show');
-  document.querySelectorAll('.mt-btn').forEach(b=>b.classList.toggle('active',b.dataset.drawer===id));
-}
-function closeDrawers(){
-  document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));
-  document.getElementById('drawer-backdrop').classList.remove('show');
-  document.querySelectorAll('.mt-btn').forEach(b=>b.classList.remove('active'));
-}
-function initDrawers(){
-  document.querySelectorAll('.mt-btn').forEach(btn=>btn.addEventListener('click',()=>{
-    const id=btn.dataset.drawer;const open=document.getElementById(id).classList.contains('open');
-    if(open)closeDrawers();else openDrawer(id);
-  }));
-  document.addEventListener('click',e=>{if(e.target.closest('.drawer-close, [data-close]')){e.preventDefault();e.stopPropagation();closeDrawers();}},true);
-  document.getElementById('drawer-backdrop').addEventListener('click',closeDrawers);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawers();});
-  initDrawerSwipe();
-}
-function initDrawerSwipe(){
-  document.querySelectorAll('.drawer').forEach(drawer=>{
-    const head=drawer.querySelector('.drawer-head'),body=drawer.querySelector('.drawer-body');
-    let startY=0,curDY=0,dragging=false,startT=0,fromHeader=false;
-    function begin(e){if(!MOBILE_MQ.matches)return;if(e.target.closest('.drawer-close'))return;const t=e.touches[0];fromHeader=!!e.target.closest('.drawer-head');if(!fromHeader&&body&&body.scrollTop>0)return;startY=t.clientY;curDY=0;startT=Date.now();dragging=true;}
-    function move(e){if(!dragging)return;const t=e.touches[0];let dy=t.clientY-startY;if(dy<0){if(fromHeader){dy=0;}else{dragging=false;drawer.classList.remove('dragging');drawer.style.transform='';return;}}curDY=dy;drawer.classList.add('dragging');drawer.style.transform='translateY('+dy+'px)';if(e.cancelable)e.preventDefault();}
-    function end(){if(!dragging)return;dragging=false;drawer.classList.remove('dragging');const dt=Date.now()-startT;const vel=curDY/Math.max(dt,1);const h=drawer.getBoundingClientRect().height||600;const dismiss=curDY>h*0.28||vel>0.6;if(dismiss){drawer.style.transform='translateY(110%)';const done=()=>{drawer.style.transform='';closeDrawers();drawer.removeEventListener('transitionend',done);};drawer.addEventListener('transitionend',done);setTimeout(done,320);}else{drawer.style.transform='';}}
-    [head,body].forEach(el=>{if(!el)return;el.addEventListener('touchstart',begin,{passive:true});el.addEventListener('touchmove',move,{passive:false});el.addEventListener('touchend',end,{passive:true});el.addEventListener('touchcancel',end,{passive:true});});
-  });
-}
-
-let isoLayer=null;
-const BAND_COLORS={15:'#059669',30:'#d97706',45:'#dc2626'};
+function initMobile(){if(MOBILE_MQ.matches)setView('map');document.getElementById('btn-map').addEventListener('click',()=>setView('map'));document.getElementById('btn-list').addEventListener('click',()=>setView('list'));const controls=document.getElementById('controls');const ft=document.getElementById('filter-toggle');if(MOBILE_MQ.matches)controls.classList.add('collapsed');ft.addEventListener('click',()=>{controls.classList.toggle('collapsed');ft.textContent=controls.classList.contains('collapsed')?'▾ Show filters':'▴ Hide filters';});MOBILE_MQ.addEventListener('change',e=>{if(e.matches){setView('map');controls.classList.add('collapsed');}else{document.body.classList.remove('view-map','view-list');}if(map)setTimeout(()=>map.invalidateSize(),60);});}
+function openDrawer(id){document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));const d=document.getElementById(id);if(!d)return;d.classList.add('open');document.getElementById('drawer-backdrop').classList.add('show');document.querySelectorAll('.mt-btn').forEach(b=>b.classList.toggle('active',b.dataset.drawer===id));}
+function closeDrawers(){document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));document.getElementById('drawer-backdrop').classList.remove('show');document.querySelectorAll('.mt-btn').forEach(b=>b.classList.remove('active'));}
+function initDrawers(){document.querySelectorAll('.mt-btn').forEach(btn=>btn.addEventListener('click',()=>{const id=btn.dataset.drawer;const open=document.getElementById(id).classList.contains('open');if(open)closeDrawers();else openDrawer(id);}));document.addEventListener('click',e=>{if(e.target.closest('.drawer-close, [data-close]')){e.preventDefault();e.stopPropagation();closeDrawers();}},true);document.getElementById('drawer-backdrop').addEventListener('click',closeDrawers);document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawers();});initDrawerSwipe();}
+function initDrawerSwipe(){document.querySelectorAll('.drawer').forEach(drawer=>{const head=drawer.querySelector('.drawer-head'),body=drawer.querySelector('.drawer-body');let startY=0,curDY=0,dragging=false,startT=0,fromHeader=false;function begin(e){if(!MOBILE_MQ.matches)return;if(e.target.closest('.drawer-close'))return;const t=e.touches[0];fromHeader=!!e.target.closest('.drawer-head');if(!fromHeader&&body&&body.scrollTop>0)return;startY=t.clientY;curDY=0;startT=Date.now();dragging=true;}function move(e){if(!dragging)return;const t=e.touches[0];let dy=t.clientY-startY;if(dy<0){if(fromHeader){dy=0;}else{dragging=false;drawer.classList.remove('dragging');drawer.style.transform='';return;}}curDY=dy;drawer.classList.add('dragging');drawer.style.transform='translateY('+dy+'px)';if(e.cancelable)e.preventDefault();}function end(){if(!dragging)return;dragging=false;drawer.classList.remove('dragging');const dt=Date.now()-startT;const vel=curDY/Math.max(dt,1);const h=drawer.getBoundingClientRect().height||600;const dismiss=curDY>h*0.28||vel>0.6;if(dismiss){drawer.style.transform='translateY(110%)';const done=()=>{drawer.style.transform='';closeDrawers();drawer.removeEventListener('transitionend',done);};drawer.addEventListener('transitionend',done);setTimeout(done,320);}else{drawer.style.transform='';}}[head,body].forEach(el=>{if(!el)return;el.addEventListener('touchstart',begin,{passive:true});el.addEventListener('touchmove',move,{passive:false});el.addEventListener('touchend',end,{passive:true});el.addEventListener('touchcancel',end,{passive:true});});});}
+let isoLayer=null;const BAND_COLORS={15:'#059669',30:'#d97706',45:'#dc2626'};
 function isoStatus(cls,html){const el=document.getElementById('iso-status');el.className=cls||'';el.innerHTML=html;el.style.display=cls?'block':'none';}
 function selectedBands(){return [...document.querySelectorAll('#drive-band-chips .chip.active')].map(c=>+c.dataset.band).sort((a,b)=>a-b);}
-function buildGrid(){
-  const latMin=ORIGIN[0]-0.70,latMax=ORIGIN[0]+0.70,lonMin=ORIGIN[1]-0.86,lonMax=ORIGIN[1]+0.86,dLat=0.06,dLon=0.075,pts=[];
-  for(let la=latMin;la<=latMax+1e-9;la+=dLat)for(let lo=lonMin;lo<=lonMax+1e-9;lo+=dLon)pts.push([+la.toFixed(5),+lo.toFixed(5)]);
-  return {pts,dLat,dLon};
-}
-function drawCircles(bands){
-  if(isoLayer)map.removeLayer(isoLayer);isoLayer=L.layerGroup();
-  [...bands].sort((a,b)=>b-a).forEach(b=>L.circle(ORIGIN,{radius:b*0.55*1609.34,pane:'isoPane',color:BAND_COLORS[b],weight:1.5,dashArray:'5,5',fillColor:BAND_COLORS[b],fillOpacity:0.14}).addTo(isoLayer));
-  isoLayer.addTo(map);document.getElementById('btn-clear-iso').style.display='block';
-  isoStatus('warn','Showing rough <b>circles</b> for '+[...bands].sort((a,b)=>a-b).join('/')+' min (quick mode). Uncheck Quick mode + Draw for the real road-based area.');
-}
-async function drawIsochrone(){
-  const bands=selectedBands();
-  if(!bands.length){isoStatus('warn','Pick at least one band (15/30/45).');return;}
-  if(document.getElementById('iso-circle-mode').checked){drawCircles(bands);return;}
-  const btn=document.getElementById('btn-draw-iso');btn.disabled=true;btn.textContent='⏳ Calculating…';
-  const {pts,dLat,dLon}=buildGrid();
-  isoStatus('warn','Calculating real drive times to '+pts.length+' points…');
-  const durations=new Array(pts.length).fill(null);const BATCH=90;
-  try{
-    for(let i=0;i<pts.length;i+=BATCH){
-      const chunk=pts.slice(i,i+BATCH);
-      const coords=[ORIGIN,...chunk].map(p=>p[1]+','+p[0]).join(';');
-      const url='https://router.project-osrm.org/table/v1/driving/'+coords+'?sources=0&annotations=duration';
-      const r=await fetch(url);if(!r.ok)throw new Error('table HTTP '+r.status);
-      const j=await r.json();const row=j.durations&&j.durations[0];if(!row)throw new Error('no durations');
-      for(let k=0;k<chunk.length;k++)durations[i+k]=row[k+1];
-      isoStatus('warn','Calculating… '+Math.min(i+BATCH,pts.length)+'/'+pts.length+' points');
-    }
-  }catch(e){btn.disabled=false;btn.textContent='🚗 Draw drive-time area';isoStatus('err','Live routing unavailable ('+(e.message||'blocked')+') — falling back to rough circles; try from home for the real shape.');drawCircles(bands);return;}
-  if(isoLayer)map.removeLayer(isoLayer);isoLayer=L.layerGroup();
-  const hLat=dLat/2,hLon=dLon/2;let drawn=0;
-  pts.forEach((p,idx)=>{const sec=durations[idx];if(sec==null)return;const min=sec/60;let band=null;for(const b of bands){if(min<=b){band=b;break;}}if(band==null)return;L.rectangle([[p[0]-hLat,p[1]-hLon],[p[0]+hLat,p[1]+hLon]],{pane:'isoPane',stroke:false,fillColor:BAND_COLORS[band],fillOpacity:0.30,interactive:false}).addTo(isoLayer);drawn++;});
-  isoLayer.addTo(map);btn.disabled=false;btn.textContent='🚗 Draw drive-time area';document.getElementById('btn-clear-iso').style.display='block';
-  isoStatus('ok','✅ Real road-based reachable area for <b>'+bands.join('/')+' min</b> ('+drawn+' cells). Typical free-flow; rush hour shrinks it, especially toward Atlanta.');
-}
+function buildGrid(){const latMin=ORIGIN[0]-0.70,latMax=ORIGIN[0]+0.70,lonMin=ORIGIN[1]-0.86,lonMax=ORIGIN[1]+0.86,dLat=0.06,dLon=0.075,pts=[];for(let la=latMin;la<=latMax+1e-9;la+=dLat)for(let lo=lonMin;lo<=lonMax+1e-9;lo+=dLon)pts.push([+la.toFixed(5),+lo.toFixed(5)]);return {pts,dLat,dLon};}
+function drawCircles(bands){if(isoLayer)map.removeLayer(isoLayer);isoLayer=L.layerGroup();[...bands].sort((a,b)=>b-a).forEach(b=>L.circle(ORIGIN,{radius:b*0.55*1609.34,pane:'isoPane',color:BAND_COLORS[b],weight:1.5,dashArray:'5,5',fillColor:BAND_COLORS[b],fillOpacity:0.14}).addTo(isoLayer));isoLayer.addTo(map);document.getElementById('btn-clear-iso').style.display='block';isoStatus('warn','Showing rough <b>circles</b> for '+[...bands].sort((a,b)=>a-b).join('/')+' min (quick mode). Uncheck Quick mode + Draw for the real road-based area.');}
+async function drawIsochrone(){const bands=selectedBands();if(!bands.length){isoStatus('warn','Pick at least one band (15/30/45).');return;}if(document.getElementById('iso-circle-mode').checked){drawCircles(bands);return;}const btn=document.getElementById('btn-draw-iso');btn.disabled=true;btn.textContent='⏳ Calculating…';const {pts,dLat,dLon}=buildGrid();isoStatus('warn','Calculating real drive times to '+pts.length+' points…');const durations=new Array(pts.length).fill(null);const BATCH=90;try{for(let i=0;i<pts.length;i+=BATCH){const chunk=pts.slice(i,i+BATCH);const coords=[ORIGIN,...chunk].map(p=>p[1]+','+p[0]).join(';');const url='https://router.project-osrm.org/table/v1/driving/'+coords+'?sources=0&annotations=duration';const r=await fetch(url);if(!r.ok)throw new Error('table HTTP '+r.status);const j=await r.json();const row=j.durations&&j.durations[0];if(!row)throw new Error('no durations');for(let k=0;k<chunk.length;k++)durations[i+k]=row[k+1];isoStatus('warn','Calculating… '+Math.min(i+BATCH,pts.length)+'/'+pts.length+' points');}}catch(e){btn.disabled=false;btn.textContent='🚗 Draw drive-time area';isoStatus('err','Live routing unavailable ('+(e.message||'blocked')+') — falling back to rough circles; try from home for the real shape.');drawCircles(bands);return;}if(isoLayer)map.removeLayer(isoLayer);isoLayer=L.layerGroup();const hLat=dLat/2,hLon=dLon/2;let drawn=0;pts.forEach((p,idx)=>{const sec=durations[idx];if(sec==null)return;const min=sec/60;let band=null;for(const b of bands){if(min<=b){band=b;break;}}if(band==null)return;L.rectangle([[p[0]-hLat,p[1]-hLon],[p[0]+hLat,p[1]+hLon]],{pane:'isoPane',stroke:false,fillColor:BAND_COLORS[band],fillOpacity:0.30,interactive:false}).addTo(isoLayer);drawn++;});isoLayer.addTo(map);btn.disabled=false;btn.textContent='🚗 Draw drive-time area';document.getElementById('btn-clear-iso').style.display='block';isoStatus('ok','✅ Real road-based reachable area for <b>'+bands.join('/')+' min</b> ('+drawn+' cells). Typical free-flow; rush hour shrinks it, especially toward Atlanta.');}
 function clearIso(){if(isoLayer){map.removeLayer(isoLayer);isoLayer=null;}document.getElementById('btn-clear-iso').style.display='none';isoStatus('','');}
-function initDriveTime(){
-  document.querySelectorAll('#drive-band-chips .chip').forEach(chip=>chip.addEventListener('click',()=>chip.classList.toggle('active')));
-  document.getElementById('btn-draw-iso').addEventListener('click',drawIsochrone);
-  document.getElementById('btn-clear-iso').addEventListener('click',clearIso);
-}
-
-function bootstrap(){
-  if(typeof L==='undefined'){document.getElementById('map').innerHTML='<div style="padding:40px;text-align:center;color:#92400e;"><b>The map engine (Leaflet) is blocked on this network.</b><br><br>Open from a home / personal network.</div>';return;}
-  initMap();renderList();renderDistrictChips();initControls();initMobile();initDrawers();initDriveTime();applyFilters();
-  document.getElementById('legend-markers').innerHTML='<b>School markers</b><br>'
-    +'<span class="legend-dot" style="background:#2563eb"></span>Gwinnett<br>'
-    +'<span class="legend-dot" style="background:#dc2626"></span>Fulton<br>'
-    +'<span class="legend-dot" style="background:#0891b2"></span>Cobb<br>'
-    +'<span class="legend-dot" style="background:#059669"></span>Forsyth<br>'
-    +'<span class="legend-dot" style="background:#db2777"></span>Cherokee<br>'
-    +'<span class="legend-dot" style="background:#7c3aed"></span>DeKalb<br>'
-    +'<span class="legend-dot" style="background:#ea580c"></span>Buford City<br>'
-    +'<span class="legend-diamond" style="background:#374151"></span>Magnet/Charter<br>'
-    +'<span class="legend-dot" style="background:#374151"></span>Comprehensive<br>'
-    +'<span class="legend-dot" style="background:#111827"></span>Peachtree Corners';
-}
+function initDriveTime(){document.querySelectorAll('#drive-band-chips .chip').forEach(chip=>chip.addEventListener('click',()=>chip.classList.toggle('active')));document.getElementById('btn-draw-iso').addEventListener('click',drawIsochrone);document.getElementById('btn-clear-iso').addEventListener('click',clearIso);}
+function bootstrap(){if(typeof L==='undefined'){document.getElementById('map').innerHTML='<div style="padding:40px;text-align:center;color:#92400e;"><b>The map engine (Leaflet) is blocked on this network.</b><br><br>Open from a home / personal network.</div>';return;}initMap();renderList();renderDistrictChips();initControls();initMobile();initDrawers();initDriveTime();applyFilters();document.getElementById('legend-markers').innerHTML='<b>School markers</b><br><span class="legend-dot" style="background:#2563eb"></span>Gwinnett<br><span class="legend-dot" style="background:#dc2626"></span>Fulton<br><span class="legend-dot" style="background:#0891b2"></span>Cobb<br><span class="legend-dot" style="background:#059669"></span>Forsyth<br><span class="legend-dot" style="background:#db2777"></span>Cherokee<br><span class="legend-dot" style="background:#7c3aed"></span>DeKalb<br><span class="legend-dot" style="background:#ea580c"></span>Buford City<br><span class="legend-diamond" style="background:#374151"></span>Magnet/Charter<br><span class="legend-dot" style="background:#374151"></span>Comprehensive<br><span class="legend-dot" style="background:#111827"></span>Peachtree Corners';}
 window.addEventListener('load',bootstrap);
 </script>
 </body>
